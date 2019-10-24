@@ -29,7 +29,7 @@ public class JumpOperationTest {
     @Test
     public void jumpOperationOnlyAcceptsUpToThreeByteAddressOnCreate() {
         expectedEx.expect(instanceOf(RuntimeException.class));
-        new JumpOperation((char) 0x1000);
+        new JumpOperation((char) 0xf000);
     }
 
     @Test

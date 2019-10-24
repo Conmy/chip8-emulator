@@ -26,7 +26,7 @@ public class Chip8Test {
 
         Assert.assertEquals("Memory not initialized correctly", 4096, chip8.getMemory().length);
         Assert.assertEquals("Program counter not set correctly", 512, chip8.getProgramCounter());
-        Assert.assertEquals("Stack size not intialized correctly", 48, chip8.getStack().length);
+        Assert.assertEquals("Stack size not intialized correctly", 48, chip8.getStack().capacity());
         Assert.assertEquals("Data Register size not initialized correctly", 16, chip8.getVDataRegisters().length);
         Assert.assertEquals("Delay Timer is not 0 after initialization", 0, chip8.getDelayTimer());
         Assert.assertEquals("Sound Timer is not 0 after initialization", 0, chip8.getSoundTimer());

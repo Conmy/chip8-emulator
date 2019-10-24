@@ -3,6 +3,8 @@ package me.conmy.emu.chip8;
 import me.conmy.emu.chip8.operations.Operation;
 import me.conmy.emu.chip8.operations.OperationFactory;
 
+import java.util.Stack;
+
 public class Chip8 {
 
     private static final int MEMORY_SIZE = 4096;
@@ -16,7 +18,7 @@ public class Chip8 {
     private byte[] VDataRegisters;
 
     private char IAddressRegister;
-    private byte[] stack;
+    private Stack<Character> stack;
 
     private byte delayTimer;
     private byte soundTimer;
@@ -26,7 +28,8 @@ public class Chip8 {
         programCounter = PROGRAM_COUNTER_START_LOCATION;
         VDataRegisters = new byte[DATA_REGISTER_SIZE];
         IAddressRegister = 0x0;
-        stack = new byte[STACK_SIZE];
+        stack = new Stack<>();
+        stack.ensureCapacity(STACK_SIZE);
         delayTimer = 0;
         soundTimer = 0;
     }
@@ -57,7 +60,7 @@ public class Chip8 {
     }
 
     public void executeOpCode(char opCode) {
-        Operation op = OperationFactory.translateOpCodeToOperation(opCode);
+        Operation op = OperationFactory.decodeOpCodeToOperation(opCode);
         op.doOperation(this);
     }
 
@@ -75,6 +78,9 @@ public class Chip8 {
 
     public int getProgramCounter() {
         return programCounter;
+    }
+    public void incProgramCounter(int value) {
+        programCounter += value;
     }
 
     public void setProgramCounter(int programCounter) {
@@ -97,11 +103,11 @@ public class Chip8 {
         this.IAddressRegister = IAddressRegister;
     }
 
-    public byte[] getStack() {
+    public Stack<Character> getStack() {
         return stack;
     }
 
-    public void setStack(byte[] stack) {
+    private void setStack(Stack<Character> stack) {
         this.stack = stack;
     }
 
