@@ -1,5 +1,8 @@
 package me.conmy.emu.chip8;
 
+import me.conmy.emu.chip8.operations.Operation;
+import me.conmy.emu.chip8.operations.OperationFactory;
+
 public class Chip8 {
 
     private static final int MEMORY_SIZE = 4096;
@@ -36,6 +39,30 @@ public class Chip8 {
         for (int i=0; i < applicationCode.length; i++) {
             getMemory()[offsetStart + i] = applicationCode[i];
         }
+    }
+
+    public void emulateChipCycle() {
+        char opCode = getCurrentOpCode();
+        executeOpCode(opCode);
+        updateTimers();
+    }
+
+    public char getCurrentOpCode() {
+        int counter = getProgramCounter();
+        byte memory0 = getMemory()[counter];
+        byte memory1 = getMemory()[counter+1];
+        char opCode = (char) (memory0 << 8);
+        opCode = (char) (opCode | (memory1 & 0x00ff));
+        return opCode;
+    }
+
+    public void executeOpCode(char opCode) {
+        Operation op = OperationFactory.translateOpCodeToOperation(opCode);
+        op.doOperation(this);
+    }
+
+    public void updateTimers() {
+
     }
 
     public byte[] getMemory() {
