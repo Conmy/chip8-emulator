@@ -55,6 +55,7 @@ public class OperationFactoryTest {
 
         Assert.assertEquals(0x01, register);
         Assert.assertEquals(0x23, value);
-
     }
+
+    // TODO: Add additional operations that are already implemented
 }

@@ -4,7 +4,16 @@ import me.conmy.emu.chip8.Chip8;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 public class VxEqualsOperationTest {
+
+    @Test
+    public void objectImplementsOperation() {
+        Operation op = new VxEqualsOperation((byte) 0x01, (byte) 0x12);
+
+        Assert.assertThat(op, instanceOf(Operation.class));
+    }
 
     @Test
     public void createsObjectWithKnownRegisterAndValue() {
