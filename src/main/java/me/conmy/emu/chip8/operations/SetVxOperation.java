@@ -4,8 +4,8 @@ import me.conmy.emu.chip8.Chip8;
 
 public class SetVxOperation implements Operation {
 
-    byte vxReg;
-    byte value;
+    private byte vxReg;
+    private byte value;
 
     public SetVxOperation(byte vxReg, byte value) {
         setVxReg(vxReg);
