@@ -4,11 +4,11 @@ import me.conmy.emu.chip8.Chip8;
 
 public class VxEqualsOperation implements Operation {
 
-    private byte register;
+    private byte vxRegister;
     private byte value;
 
     public VxEqualsOperation(byte register, byte value) {
-        setRegister(register);
+        setVxRegister(register);
         setValue(value);
     }
 
@@ -23,15 +23,15 @@ public class VxEqualsOperation implements Operation {
 
     }
 
-    public byte getRegister() {
-        return register;
+    public byte getVxRegister() {
+        return vxRegister;
     }
     public int getRegisterInt() {
-        return Byte.toUnsignedInt(register);
+        return Byte.toUnsignedInt(vxRegister);
     }
 
-    private void setRegister(byte register) {
-        this.register = register;
+    private void setVxRegister(byte vxRegister) {
+        this.vxRegister = vxRegister;
     }
 
     public byte getValue() {

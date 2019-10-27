@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 
-public class SetVxOperationTest {
+public class SetVxToNNOperationTest {
 
     private byte vxReg;
     private byte value;
@@ -17,7 +17,7 @@ public class SetVxOperationTest {
     public void setup() {
         vxReg = 0x00;
         value = 0x01;
-        op = new SetVxOperation(vxReg, value);
+        op = new SetVxToNNOperation(vxReg, value);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class SetVxOperationTest {
 
     @Test
     public void creatingObjectStoresValueForVxRegAndValue() {
-        SetVxOperation setOp = (SetVxOperation) op;
+        SetVxToNNOperation setOp = (SetVxToNNOperation) op;
 
         Assert.assertEquals(value, setOp.getValue());
         Assert.assertEquals(vxReg, setOp.getVxReg());

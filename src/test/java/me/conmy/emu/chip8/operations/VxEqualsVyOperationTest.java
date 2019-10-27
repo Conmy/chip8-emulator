@@ -51,7 +51,7 @@ public class VxEqualsVyOperationTest {
         Assert.assertEquals(pc + 2, chip8.getProgramCounter());
     }
 
-    // TODO: Decide what to do with vxReg adn vyReg if value is over 0x0f.
+    // TODO: Decide what to do with vxReg and vyReg if value is over 0x0f.
     // This can't happen in normal execution since vxReg and vyReg are parsed from a single nibble
 
 }

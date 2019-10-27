@@ -4,24 +4,24 @@ import me.conmy.emu.chip8.Chip8;
 
 public class JumpOperation implements Operation {
 
-    private char addressNNN;
+    private char address;
 
-    public JumpOperation(char addressNNN) {
-        setAddressNNN(addressNNN);
+    public JumpOperation(char address) {
+        setAddress(address);
     }
 
     public void doOperation(Chip8 chip8) {
-        chip8.setProgramCounter(getAddressNNN());
+        chip8.setProgramCounter(getAddress());
     }
 
-    public char getAddressNNN() {
-        return addressNNN;
+    public char getAddress() {
+        return address;
     }
 
-    private void setAddressNNN(char addressNNN) {
-        if (((int) addressNNN) > 0xfff ) {
+    private void setAddress(char address) {
+        if (((int) address) > 0xfff ) {
             throw new RuntimeException("Tried to set an address value greater than the max memory size");
         }
-        this.addressNNN = addressNNN;
+        this.address = address;
     }
 }

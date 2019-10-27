@@ -39,7 +39,7 @@ public class JumpOperationTest {
 
     @Test
     public void jumpOperationInitializesWithThreeByteAddress() {
-        char address = operation.getAddressNNN();
+        char address = operation.getAddress();
         Assert.assertEquals(0x100, address);
         address = (char) (0x0fff & address);
         Assert.assertEquals(0x100, address);

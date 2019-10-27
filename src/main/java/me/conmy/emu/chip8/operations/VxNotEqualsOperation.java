@@ -4,17 +4,17 @@ import me.conmy.emu.chip8.Chip8;
 
 public class VxNotEqualsOperation implements Operation {
 
-    private byte register;
+    private byte vxRegister;
     private byte value;
 
     public VxNotEqualsOperation(byte register, byte value) {
-        setRegister(register);
+        setVxRegister(register);
         setValue(value);
     }
 
     @Override
     public void doOperation(Chip8 chip8) {
-        byte registerValue = chip8.getVDataRegisters()[getRegister()];
+        byte registerValue = chip8.getVDataRegisters()[getVxRegister()];
 
         if (registerValue != getValue()) {
             chip8.incProgramCounter(4);
@@ -23,12 +23,12 @@ public class VxNotEqualsOperation implements Operation {
         }
     }
 
-    public byte getRegister() {
-        return register;
+    public byte getVxRegister() {
+        return vxRegister;
     }
 
-    private void setRegister(byte register) {
-        this.register = register;
+    private void setVxRegister(byte vxRegister) {
+        this.vxRegister = vxRegister;
     }
 
     public byte getValue() {

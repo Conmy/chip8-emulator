@@ -22,7 +22,7 @@ public class CallSubroutineOperationTest {
     }
     @Test
     public void createObjectStoresTheAddress() {
-        char address = op.getAddressNNN();
+        char address = op.getAddress();
         Assert.assertEquals(0x0f23, address);
     }
 

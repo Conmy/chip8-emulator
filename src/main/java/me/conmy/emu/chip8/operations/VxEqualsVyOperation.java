@@ -4,19 +4,19 @@ import me.conmy.emu.chip8.Chip8;
 
 public class VxEqualsVyOperation implements Operation {
 
-    private byte vxReg;
-    private byte vyReg;
+    private byte vxRegister;
+    private byte vyRegister;
 
     public VxEqualsVyOperation(byte vxReg, byte vyReg) {
-        setVxReg(vxReg);
-        setVyReg(vyReg);
+        setVxRegister(vxReg);
+        setVyRegister(vyReg);
     }
 
     @Override
     public void doOperation(Chip8 chip8) {
         byte[] registers = chip8.getVDataRegisters();
-        byte vxValue = registers[getVxReg()];
-        byte vyValue = registers[getVyReg()];
+        byte vxValue = registers[getVxRegister()];
+        byte vyValue = registers[getVyRegister()];
 
         if (vxValue == vyValue) {
             chip8.incProgramCounter(4);
@@ -25,19 +25,19 @@ public class VxEqualsVyOperation implements Operation {
         }
     }
 
-    public byte getVxReg() {
-        return vxReg;
+    public byte getVxRegister() {
+        return vxRegister;
     }
 
-    private void setVxReg(byte vxReg) {
-        this.vxReg = vxReg;
+    private void setVxRegister(byte vxReg) {
+        this.vxRegister = vxReg;
     }
 
-    public byte getVyReg() {
-        return vyReg;
+    public byte getVyRegister() {
+        return vyRegister;
     }
 
-    private void setVyReg(byte vyReg) {
-        this.vyReg = vyReg;
+    private void setVyRegister(byte vyReg) {
+        this.vyRegister = vyReg;
     }
 }

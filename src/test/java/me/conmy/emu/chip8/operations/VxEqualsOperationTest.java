@@ -18,7 +18,7 @@ public class VxEqualsOperationTest {
     @Test
     public void createsObjectWithKnownRegisterAndValue() {
         VxEqualsOperation op = new VxEqualsOperation((byte) 0x01, (byte) 0x23);
-        Assert.assertEquals(0x01, op.getRegister());
+        Assert.assertEquals(0x01, op.getVxRegister());
         Assert.assertEquals(0x23, op.getValue());
     }
 
