@@ -147,9 +147,20 @@ public class OperationFactoryTest {
         expectClassInstanceGivenOpCode(VxNotEqualsVyOperation.class, (char) 0x9120);
     }
 
+    /**
+     * 0xANNN: Set I = NNN
+     */
     @Test
     public void createSetIRegToNNNOperationWithCode0xANNN() {
         expectClassInstanceGivenOpCode(SetIRegToNNNOperation.class, (char) 0xA47a);
+    }
+
+    /**
+     * 0xBNNN: Jump To (V0 + NNN)
+     */
+    @Test
+    public void createJumpToV0PlusNNNOperationWithCode0xBNNN() {
+        expectClassInstanceGivenOpCode(JumpToV0PlusNNNOperation.class, (char) 0xB675);
     }
 
     // --------------------------------------------------------------------------------------------

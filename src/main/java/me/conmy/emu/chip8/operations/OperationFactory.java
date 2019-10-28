@@ -51,6 +51,8 @@ public class OperationFactory {
                 return new VxNotEqualsVyOperation(nibble3, nibble2);
             case 0xa:
                 return new SetIRegToNNNOperation(remainder);
+            case 0xb:
+                return new JumpToV0PlusNNNOperation(remainder);
         }
         throw new RuntimeException("Could not decode opCode passed to OperationFactory. Was: " + Byte.toString(byte2) + Byte.toString(byte1));
     }
