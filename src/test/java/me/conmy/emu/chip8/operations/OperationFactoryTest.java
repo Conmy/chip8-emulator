@@ -116,7 +116,7 @@ public class OperationFactoryTest {
     }
 
     /**
-     * 0x8XY6: Vx = Vx << 1
+     * 0x8XY6: Vx = Vx >> 1
      */
     @Test
     public void createRightShiftVxOperationWithCode0x8XY6() {
@@ -131,9 +131,17 @@ public class OperationFactoryTest {
         expectClassInstanceGivenOpCode(SetVxToVyMinusVxOperation.class, (char) 0x8127);
     }
 
+    /**
+     * 0x8XYE: Vx = Vx << 1
+     */
     @Test
     public void createLeftShiftVxOperationWithCode0x8XYE() {
         expectClassInstanceGivenOpCode(LeftShiftVxOperation.class, (char) 0x8e1e);
+    }
+
+    @Test
+    public void createVxNotEqualsVyOperationWithCode0x9XY0() {
+        expectClassInstanceGivenOpCode(VxNotEqualsVyOperation.class, (char) 0x9120);
     }
 
     // --------------------------------------------------------------------------------------------

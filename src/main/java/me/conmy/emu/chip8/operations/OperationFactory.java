@@ -47,6 +47,8 @@ public class OperationFactory {
                     case 0x0e:
                         return new LeftShiftVxOperation(nibble3);
                 }
+            case 0x9:
+                return new VxNotEqualsVyOperation(nibble3, nibble2);
         }
         return new JumpOperation((char) (opCode & 0x0fff));
     }
