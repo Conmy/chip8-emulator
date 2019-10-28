@@ -26,6 +26,27 @@ public class OperationFactory {
                 return new SetVxToNNOperation(nibble3, byte1);
             case 0x7:
                 return new SetVxToVxPlusNNOperation(nibble3, byte1);
+            case 0x8:
+                switch (nibble1) {
+                    case 0x0:
+                        return new SetVxToVyOperation(nibble3, nibble2);
+                    case 0x01:
+                        return new SetVxToVxORVyOperation(nibble3, nibble2);
+                    case 0x02:
+                        return new SetVxToVxANDVyOperation(nibble3, nibble2);
+                    case 0x03:
+                        return new SetVxToVxXORVyOperation(nibble3, nibble2);
+                    case 0x04:
+                        return new SetVxToVxPlusVyOperation(nibble3, nibble2);
+                    case 0x05:
+                        return new SetVxToVxMinusVyOperation(nibble3, nibble2);
+                    case 0x06:
+                        return new RightShiftVxOperation(nibble3);
+                    case 0x07:
+                        return new SetVxToVyMinusVxOperation(nibble3, nibble2);
+                    case 0x0e:
+                        return new LeftShiftVxOperation(nibble3);
+                }
         }
         return new JumpOperation((char) (opCode & 0x0fff));
     }

@@ -67,6 +67,75 @@ public class OperationFactoryTest {
         expectClassInstanceGivenOpCode(SetVxToVxPlusNNOperation.class, (char) 0x7412);
     }
 
+    /**
+     * 0x8XY0: Vx = Vy
+     */
+    @Test
+    public void createSetVxToVyOperationWithCode0x8XY0() {
+        expectClassInstanceGivenOpCode(SetVxToVyOperation.class, (char) 0x8120);
+    }
+
+    /**
+     * 0x8XY1: Vx = Vx | Vy
+     */
+    @Test
+    public void createSetVxToVxORVyOperationWithCode0x8XY1() {
+        expectClassInstanceGivenOpCode(SetVxToVxORVyOperation.class, (char) 0x8141);
+    }
+
+    /**
+     * 0x8XY2: Vx = Vx & Vy
+     */
+    @Test
+    public void createSetVxToVxANDVyOperationWithCode0x8XY2() {
+        expectClassInstanceGivenOpCode(SetVxToVxANDVyOperation.class, (char) 0x85a2);
+    }
+
+    /**
+     * 0x8XY3: Vx = Vx ^ Vy
+     */
+    @Test
+    public void createSetVxToVxXORVyOperationWithCode0x8XY3() {
+        expectClassInstanceGivenOpCode(SetVxToVxXORVyOperation.class, (char) 0x8ba3);
+    }
+
+    /**
+     * 0x8XY4: Vx = Vx + Vy
+     */
+    @Test
+    public void createSetVxToVxPlusVyOperationWithCode0x8XY4() {
+        expectClassInstanceGivenOpCode(SetVxToVxPlusVyOperation.class, (char) 0x8ec4);
+    }
+
+    /**
+     * 0x8XY5: Vx = Vx - Vy
+     */
+    @Test
+    public void createSetVxToVxMinusVyOperationWithCode0x8XY5() {
+        expectClassInstanceGivenOpCode(SetVxToVxMinusVyOperation.class, (char) 0x81b5);
+    }
+
+    /**
+     * 0x8XY6: Vx = Vx << 1
+     */
+    @Test
+    public void createRightShiftVxOperationWithCode0x8XY6() {
+        expectClassInstanceGivenOpCode(RightShiftVxOperation.class, (char) 0x8326);
+    }
+
+    /**
+     * 0x8XY7: Vx = Vy - Vx
+     */
+    @Test
+    public void createSetVxToVyMinusVxOperationWithCode0x8XY7() {
+        expectClassInstanceGivenOpCode(SetVxToVyMinusVxOperation.class, (char) 0x8127);
+    }
+
+    @Test
+    public void createLeftShiftVxOperationWithCode0x8XYE() {
+        expectClassInstanceGivenOpCode(LeftShiftVxOperation.class, (char) 0x8e1e);
+    }
+
     // --------------------------------------------------------------------------------------------
     // Checks that objects created were created with the correct data
     // --------------------------------------------------------------------------------------------
@@ -126,6 +195,25 @@ public class OperationFactoryTest {
         Assert.assertEquals(0x0f, vxReg);
         Assert.assertEquals((byte) 0xed, value);
     }
+
+    @Test
+    public void aCreatedSetVxToVyOperationWasCreatedWithCorrectValues() {
+        SetVxToVyOperation op = (SetVxToVyOperation) OperationFactory.decodeOpCodeToOperation((char) 0x8030);
+        byte vxReg = op.getVxReg();
+        byte vyReg = op.getVyReg();
+
+        Assert.assertEquals((byte) 0x00, vxReg);
+        Assert.assertEquals((byte) 0x03, vyReg);
+    }
+
+    @Test
+    public void aCreatedSetVxToVxPlusNNOperationWasCreatedWithTheCorrectValues() {
+        SetVxToVxPlusNNOperation op = (SetVxToVxPlusNNOperation) OperationFactory.decodeOpCodeToOperation((char) 0x7123);
+        Assert.assertEquals(0x01, op.getVxReg());
+        Assert.assertEquals(0x023, op.getValue());
+    }
+
+    // TODO: Assert all operations are created with correct parsed values from opcode.
 
     // --------------------------------------------------------------------------------------------
     // Private methods
