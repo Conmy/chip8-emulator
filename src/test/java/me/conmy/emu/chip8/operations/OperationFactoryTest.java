@@ -139,9 +139,17 @@ public class OperationFactoryTest {
         expectClassInstanceGivenOpCode(LeftShiftVxOperation.class, (char) 0x8e1e);
     }
 
+    /**
+     * 0x9XY0: Condition Vx != Vy
+     */
     @Test
     public void createVxNotEqualsVyOperationWithCode0x9XY0() {
         expectClassInstanceGivenOpCode(VxNotEqualsVyOperation.class, (char) 0x9120);
+    }
+
+    @Test
+    public void createSetIRegToNNNOperationWithCode0xANNN() {
+        expectClassInstanceGivenOpCode(SetIRegToNNNOperation.class, (char) 0xA47a);
     }
 
     // --------------------------------------------------------------------------------------------

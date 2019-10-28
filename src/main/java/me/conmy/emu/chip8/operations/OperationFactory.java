@@ -49,7 +49,9 @@ public class OperationFactory {
                 }
             case 0x9:
                 return new VxNotEqualsVyOperation(nibble3, nibble2);
+            case 0xa:
+                return new SetIRegToNNNOperation(remainder);
         }
-        return new JumpOperation((char) (opCode & 0x0fff));
+        throw new RuntimeException("Could not decode opCode passed to OperationFactory. Was: " + Byte.toString(byte2) + Byte.toString(byte1));
     }
 }
