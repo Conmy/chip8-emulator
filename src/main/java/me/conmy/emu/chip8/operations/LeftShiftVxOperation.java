@@ -18,6 +18,8 @@ public class LeftShiftVxOperation implements Operation {
 
         registers[getVxReg()] = (byte) (vxValue << 1);
         registers[0x0f] = carry;
+
+        chip8.incProgramCounter(2);
     }
 
     public byte getVxReg() {

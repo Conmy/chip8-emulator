@@ -18,6 +18,8 @@ public class SetVxToVxORVyOperation implements Operation {
         byte vxValue = registers[getVxReg()];
         byte vyValue = registers[getVyReg()];
         registers[getVxReg()] = (byte) (( vxValue | vyValue) & 0x0ff);
+
+        chip8.incProgramCounter(2);
     }
 
     public byte getVxReg() {

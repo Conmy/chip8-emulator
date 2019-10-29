@@ -16,6 +16,8 @@ public class SetVxToVyOperation implements Operation {
     public void doOperation(Chip8 chip8) {
         byte[] registers = chip8.getVDataRegisters();
         registers[getVxReg()] = registers[getVyReg()];
+
+        chip8.incProgramCounter(2);
     }
 
     public byte getVxReg() {

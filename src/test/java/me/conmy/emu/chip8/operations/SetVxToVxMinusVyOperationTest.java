@@ -55,4 +55,12 @@ public class SetVxToVxMinusVyOperationTest {
         Assert.assertEquals((byte)0xf2, chip8.getVDataRegisters()[0x00]);
         Assert.assertEquals(0x00, chip8.getVDataRegisters()[0x0f]);
     }
+
+    @Test
+    public void doOperationIncreasesProgramCounterOnCompletion() {
+        Chip8 chip8 = new Chip8();
+        int pc = chip8.getProgramCounter();
+        op.doOperation(chip8);
+        Assert.assertEquals(pc+2, chip8.getProgramCounter());
+    }
 }

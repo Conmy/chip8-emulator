@@ -17,9 +17,9 @@ public class OperationFactory {
             case 0x2:
                 return new CallSubroutineOperation(remainder);
             case 0x3:
-                return new VxEqualsOperation(nibble3, byte1);
+                return new VxEqualsNNOperation(nibble3, byte1);
             case 0x4:
-                return new VxNotEqualsOperation(nibble3, byte1);
+                return new VxNotEqualsNNOperation(nibble3, byte1);
             case 0x5:
                 return new VxEqualsVyOperation(nibble3, nibble2);
             case 0x6:

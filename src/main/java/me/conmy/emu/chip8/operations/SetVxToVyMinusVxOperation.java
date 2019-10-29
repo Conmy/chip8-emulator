@@ -26,6 +26,8 @@ public class SetVxToVyMinusVxOperation implements Operation {
 
         int result = vyValue - vxValue;
         registers[getVxReg()] = (byte) (result & 0x0ff);
+
+        chip8.incProgramCounter(2);
     }
 
     public byte getVxReg() {

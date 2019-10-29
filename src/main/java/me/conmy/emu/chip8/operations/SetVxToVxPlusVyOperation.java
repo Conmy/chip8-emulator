@@ -26,6 +26,8 @@ public class SetVxToVxPlusVyOperation implements Operation {
             registers[0x0f] = 0x00;
         }
         registers[getVxReg()] = (byte) (result & 0x0ff);
+
+        chip8.incProgramCounter(2);
     }
 
     public byte getVxReg() {

@@ -35,4 +35,12 @@ public class SetVxToVxORVyOperationTest {
         Assert.assertEquals((byte) 0xaf, registers[0x01]);
 
     }
+
+    @Test
+    public void doOperationIncreasesProgramCounterOnCompletion() {
+        Chip8 chip8 = new Chip8();
+        int pc = chip8.getProgramCounter();
+        op.doOperation(chip8);
+        Assert.assertEquals(pc+2, chip8.getProgramCounter());
+    }
 }

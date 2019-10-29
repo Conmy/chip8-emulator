@@ -32,7 +32,7 @@ public class OperationFactoryTest {
      */
     @Test
     public void createVxEqualsOperationWithCode0x3XNN() {
-        expectClassInstanceGivenOpCode(VxEqualsOperation.class, (char) 0x311f);
+        expectClassInstanceGivenOpCode(VxEqualsNNOperation.class, (char) 0x311f);
     }
 
     /**
@@ -40,7 +40,7 @@ public class OperationFactoryTest {
      */
     @Test
     public void createVxNotEqualsOperationWithCode0x4XNN() {
-        expectClassInstanceGivenOpCode(VxNotEqualsOperation.class, (char) 0x41f0);
+        expectClassInstanceGivenOpCode(VxNotEqualsNNOperation.class, (char) 0x41f0);
     }
 
     /**
@@ -193,7 +193,7 @@ public class OperationFactoryTest {
 
     @Test
     public void aCreatedVxEqualsOperationContainsRegisterAddressAndValue() {
-        VxEqualsOperation op = (VxEqualsOperation) OperationFactory.decodeOpCodeToOperation((char) 0x3123);
+        VxEqualsNNOperation op = (VxEqualsNNOperation) OperationFactory.decodeOpCodeToOperation((char) 0x3123);
         byte register = op.getVxRegister();
         byte value = op.getValue();
 
@@ -203,7 +203,7 @@ public class OperationFactoryTest {
 
     @Test
     public void aCreatedVxNotEqualsOperationWasCreatedWithCorrectValues() {
-        VxNotEqualsOperation op = (VxNotEqualsOperation) OperationFactory.decodeOpCodeToOperation((char) 0x4123);
+        VxNotEqualsNNOperation op = (VxNotEqualsNNOperation) OperationFactory.decodeOpCodeToOperation((char) 0x4123);
         byte register = op.getVxRegister();
         byte value = op.getValue();
 

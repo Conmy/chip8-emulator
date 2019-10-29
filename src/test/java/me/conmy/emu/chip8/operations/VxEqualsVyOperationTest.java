@@ -53,5 +53,6 @@ public class VxEqualsVyOperationTest {
 
     // TODO: Decide what to do with vxReg and vyReg if value is over 0x0f.
     // This can't happen in normal execution since vxReg and vyReg are parsed from a single nibble
+    // in the OperationFactory but is still a possibility for a byte to contain a value bigger than 0x0f.
 
 }

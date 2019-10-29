@@ -2,12 +2,12 @@ package me.conmy.emu.chip8.operations;
 
 import me.conmy.emu.chip8.Chip8;
 
-public class VxNotEqualsOperation implements Operation {
+public class VxNotEqualsNNOperation implements Operation {
 
     private byte vxRegister;
     private byte value;
 
-    public VxNotEqualsOperation(byte register, byte value) {
+    public VxNotEqualsNNOperation(byte register, byte value) {
         setVxRegister(register);
         setValue(value);
     }

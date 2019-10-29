@@ -18,6 +18,8 @@ public class SetVxToVxPlusNNOperation implements Operation {
 
         vxValue = vxValue + (value & 0x00ff);
         chip8.getVDataRegisters()[getVxReg()] = (byte) (vxValue & 0x0ff);
+
+        chip8.incProgramCounter(2);
     }
 
     public byte getVxReg() {

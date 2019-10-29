@@ -6,11 +6,11 @@ import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 
-public class VxNotEqualsOperationTest {
+public class VxNotEqualsNNOperationTest {
 
     @Test
     public void objectImplementsOperation() {
-        Operation op = new VxNotEqualsOperation((byte) 0x00, (byte) 0x12);
+        Operation op = new VxNotEqualsNNOperation((byte) 0x00, (byte) 0x12);
         Assert.assertThat(op, instanceOf(Operation.class));
     }
 
@@ -19,7 +19,7 @@ public class VxNotEqualsOperationTest {
         Chip8 chip8 = new Chip8();
         chip8.getVDataRegisters()[1] = 0x23;
         int pc = chip8.getProgramCounter();
-        VxNotEqualsOperation op = new VxNotEqualsOperation((byte) 0x01, (byte) 0x01);
+        VxNotEqualsNNOperation op = new VxNotEqualsNNOperation((byte) 0x01, (byte) 0x01);
         op.doOperation(chip8);
 
         Assert.assertEquals(pc + 4, chip8.getProgramCounter());
@@ -30,7 +30,7 @@ public class VxNotEqualsOperationTest {
         Chip8 chip8 = new Chip8();
         chip8.getVDataRegisters()[1] = (byte) 0xaf;
         int pc = chip8.getProgramCounter();
-        VxNotEqualsOperation op = new VxNotEqualsOperation((byte) 0x01, (byte) 0xaf);
+        VxNotEqualsNNOperation op = new VxNotEqualsNNOperation((byte) 0x01, (byte) 0xaf);
         op.doOperation(chip8);
 
         Assert.assertEquals(pc + 2, chip8.getProgramCounter());

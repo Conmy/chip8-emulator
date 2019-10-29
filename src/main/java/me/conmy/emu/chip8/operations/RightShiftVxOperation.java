@@ -19,6 +19,8 @@ public class RightShiftVxOperation implements Operation {
 
         registers[0x0f] = carry;
         registers[getVxReg()] = vxValue;
+
+        chip8.incProgramCounter(2);
     }
 
     public byte getVxReg() {
