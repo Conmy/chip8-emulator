@@ -53,6 +53,8 @@ public class OperationFactory {
                 return new SetIRegToNNNOperation(remainder);
             case 0xb:
                 return new JumpToV0PlusNNNOperation(remainder);
+            case 0xc:
+                return new SetVxToRandANDNNOperation(nibble3, byte1);
         }
         throw new RuntimeException("Could not decode opCode passed to OperationFactory. Was: " + Byte.toString(byte2) + Byte.toString(byte1));
     }

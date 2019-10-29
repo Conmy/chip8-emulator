@@ -163,6 +163,14 @@ public class OperationFactoryTest {
         expectClassInstanceGivenOpCode(JumpToV0PlusNNNOperation.class, (char) 0xB675);
     }
 
+    /**
+     * 0xCXNN: Vx = RAND & NN
+     */
+    @Test
+    public void createSetVxToRandANDNNOperationWithCode0xCXNN() {
+        expectClassInstanceGivenOpCode(SetVxToRandANDNNOperation.class, (char) 0xC107);
+    }
+
     // --------------------------------------------------------------------------------------------
     // Checks that objects created were created with the correct data
     // --------------------------------------------------------------------------------------------
