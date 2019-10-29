@@ -54,7 +54,10 @@ public class Chip8Test {
 
     @Test
     public void emulateChipCycleCallsExpectedMethodsInTheCorrectOrder() {
-
+        byte[] memory = chip8.getMemory();
+        int pc = chip8.getProgramCounter();
+        memory[pc] = 0x60;
+        memory[pc+1] = 0x00;
         Chip8 spyChip8 = Mockito.spy(chip8);
         spyChip8.emulateChipCycle();
         Mockito.verify(spyChip8).getCurrentOpCode();

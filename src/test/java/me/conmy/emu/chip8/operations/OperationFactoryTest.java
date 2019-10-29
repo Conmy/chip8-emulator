@@ -1,7 +1,9 @@
 package me.conmy.emu.chip8.operations;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 
@@ -10,6 +12,15 @@ public class OperationFactoryTest {
     // --------------------------------------------------------------------------------------------
     // Checks that objects are created for the expected opCodes
     // --------------------------------------------------------------------------------------------
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
+    @Test
+    public void invalidOpCodeThrowsARuntimeException() {
+        expectedException.expect(RuntimeException.class);
+        OperationFactory.decodeOpCodeToOperation((char) 0x0000);
+    }
 
     /**
      * 0x1NNN: Jump Operation
@@ -172,11 +183,11 @@ public class OperationFactoryTest {
     }
 
     /**
-     * 0xFX15: Vx = Delay_timer()
+     * 0xFX07: Vx = Delay_timer()
      */
     @Test
     public void createSetVxToDelayTimerOperationWithCode0xFX15() {
-        expectClassInstanceGivenOpCode(SetVxToDelayTimerOperation.class, (char) 0xf115);
+        expectClassInstanceGivenOpCode(SetVxToDelayTimerOperation.class, (char) 0xf107);
     }
 
 
