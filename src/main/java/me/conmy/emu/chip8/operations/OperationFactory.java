@@ -63,6 +63,10 @@ public class OperationFactory {
                         return new SetDelayTimerToVxOperation(nibble3);
                     case 0x18:
                         return new SetSoundTimerToVxOperation(nibble3);
+                    case 0x1E:
+                        return new SetIRegToIPlusVxOperation(nibble3);
+                    case 0x29:
+                        return new SetIRegToSpriteAddressOfVxValueOperation(nibble3);
                 }
         }
         throw new RuntimeException("Could not decode opCode passed to OperationFactory. Was: " + byte2 + byte1);

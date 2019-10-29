@@ -12,6 +12,26 @@ public class Chip8 {
     private static final int STACK_SIZE = 48;
     private static final int PROGRAM_COUNTER_START_LOCATION = 512;
 
+    private static final int SPRITE_FONT_START_LOCATION = 0;
+    private static final byte[] SPRITE_FONT_VALUES = {
+            (byte) 0xF0, (byte) 0x90, (byte) 0x90, (byte) 0x90, (byte) 0xF0, // 0
+            (byte) 0x20, (byte) 0x60, (byte) 0x20, (byte) 0x20, (byte) 0x70, // 1
+            (byte) 0xF0, (byte) 0x10, (byte) 0xF0, (byte) 0x80, (byte) 0xF0, // 2
+            (byte) 0xF0, (byte) 0x10, (byte) 0xF0, (byte) 0x10, (byte) 0xF0, // 3
+            (byte) 0x90, (byte) 0x90, (byte) 0xF0, (byte) 0x10, (byte) 0x10, // 4
+            (byte) 0xF0, (byte) 0x80, (byte) 0xF0, (byte) 0x10, (byte) 0xF0, // 5
+            (byte) 0xF0, (byte) 0x80, (byte) 0xF0, (byte) 0x90, (byte) 0xF0, // 6
+            (byte) 0xF0, (byte) 0x10, (byte) 0x20, (byte) 0x40, (byte) 0x40, // 7
+            (byte) 0xF0, (byte) 0x90, (byte) 0xF0, (byte) 0x90, (byte) 0xF0, // 8
+            (byte) 0xF0, (byte) 0x90, (byte) 0xF0, (byte) 0x10, (byte) 0xF0, // 9
+            (byte) 0xF0, (byte) 0x90, (byte) 0xF0, (byte) 0x90, (byte) 0x90, // A
+            (byte) 0xE0, (byte) 0x90, (byte) 0xE0, (byte) 0x90, (byte) 0xE0, // B
+            (byte) 0xF0, (byte) 0x80, (byte) 0x80, (byte) 0x80, (byte) 0xF0, // C
+            (byte) 0xE0, (byte) 0x90, (byte) 0x90, (byte) 0x90, (byte) 0xE0, // D
+            (byte) 0xF0, (byte) 0x80, (byte) 0xF0, (byte) 0x80, (byte) 0xF0, // E
+            (byte) 0xF0, (byte) 0x80, (byte) 0xF0, (byte) 0x80, (byte) 0x80  // F
+    };
+
     private byte[] memory;
     private int programCounter;
 
@@ -25,6 +45,7 @@ public class Chip8 {
 
     public Chip8() {
         memory = new byte[MEMORY_SIZE];
+        loadFontInToMemory();
         programCounter = PROGRAM_COUNTER_START_LOCATION;
         VDataRegisters = new byte[DATA_REGISTER_SIZE];
         IAddressRegister = 0x0;
@@ -125,5 +146,15 @@ public class Chip8 {
 
     public void setSoundTimer(byte soundTimer) {
         this.soundTimer = soundTimer;
+    }
+
+    public static char getSpriteRegAddress(byte nibble) {
+        return (char) ((SPRITE_FONT_START_LOCATION + (5 * nibble)) & 0x0ffff);
+    }
+
+    private void loadFontInToMemory() {
+        for (int i=0; i < SPRITE_FONT_VALUES.length; i++) {
+            getMemory()[SPRITE_FONT_START_LOCATION + i] = SPRITE_FONT_VALUES[i];
+        }
     }
 }

@@ -88,4 +88,14 @@ public class Chip8Test {
         Assert.assertEquals(0x451a, opCode);
     }
 
+    @Test
+    public void getSpriteRegAddressReturnsTheRegAddressLocationOfSpriteInformationForTheValuePassed() {
+        char[] expectedAddress = {
+                0x00, 0x05, 0x0a, 0x0f, 0x14, 0x19, 0x1e, 0x23, 0x28, 0x2d, 0x32, 0x37, 0x3c, 0x41, 0x46, 0x4b};
+
+        for (int i=0; i < 0x10; i++) {
+            char addressLoc = Chip8.getSpriteRegAddress((byte) i);
+            Assert.assertEquals(expectedAddress[i], addressLoc);
+        }
+    }
 }

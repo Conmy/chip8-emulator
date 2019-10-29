@@ -198,10 +198,30 @@ public class OperationFactoryTest {
         expectClassInstanceGivenOpCode(SetDelayTimerToVxOperation.class, (char) 0xf415);
     }
 
+    /**
+     * 0xFX18: Sound_timer = Vx
+     */
     @Test
     public void createSetSoundTimerToVxOperationWithCode0xFX18() {
         expectClassInstanceGivenOpCode(SetSoundTimerToVxOperation.class, (char) 0xf118);
     }
+
+    /**
+     * 0xFX1E: IReg = IReg + Vx
+     */
+    @Test
+    public void createSetIRegToIPlusVxOperationWithCode0xFX1E() {
+        expectClassInstanceGivenOpCode(SetIRegToIPlusVxOperation.class, (char) 0xf11E);
+    }
+
+    /**
+     * 0xFX29: IReg = Sprite_Address(Vx);
+     */
+    @Test
+    public void createSetIRegToSpriteAddressOfVxValueOperationWithCode0xFX29() {
+        expectClassInstanceGivenOpCode(SetIRegToSpriteAddressOfVxValueOperation.class, (char) 0xf129);
+    }
+
     // --------------------------------------------------------------------------------------------
     // Checks that objects created were created with the correct data
     // --------------------------------------------------------------------------------------------
