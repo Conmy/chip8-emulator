@@ -171,6 +171,16 @@ public class OperationFactoryTest {
         expectClassInstanceGivenOpCode(SetVxToRandANDNNOperation.class, (char) 0xC107);
     }
 
+    /**
+     * 0xFX15: Vx = Delay_timer()
+     */
+    @Test
+    public void createSetVxToDelayTimerOperationWithCode0xFX15() {
+        expectClassInstanceGivenOpCode(SetVxToDelayTimerOperation.class, (char) 0xf115);
+    }
+
+
+
     // --------------------------------------------------------------------------------------------
     // Checks that objects created were created with the correct data
     // --------------------------------------------------------------------------------------------

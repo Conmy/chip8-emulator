@@ -55,7 +55,12 @@ public class OperationFactory {
                 return new JumpToV0PlusNNNOperation(remainder);
             case 0xc:
                 return new SetVxToRandANDNNOperation(nibble3, byte1);
+            case 0xf:
+                switch (byte1) {
+                    case 0x07:
+                        return new SetVxToDelayTimerOperation(nibble3);
+                }
         }
-        throw new RuntimeException("Could not decode opCode passed to OperationFactory. Was: " + Byte.toString(byte2) + Byte.toString(byte1));
+        throw new RuntimeException("Could not decode opCode passed to OperationFactory. Was: " + byte2 + byte1);
     }
 }
