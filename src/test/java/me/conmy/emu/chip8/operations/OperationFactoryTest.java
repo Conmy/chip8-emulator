@@ -186,12 +186,22 @@ public class OperationFactoryTest {
      * 0xFX07: Vx = Delay_timer()
      */
     @Test
-    public void createSetVxToDelayTimerOperationWithCode0xFX15() {
+    public void createSetVxToDelayTimerOperationWithCode0xFX07() {
         expectClassInstanceGivenOpCode(SetVxToDelayTimerOperation.class, (char) 0xf107);
     }
 
+    /**
+     * 0xFX15: Delay_timer = Vx
+     */
+    @Test
+    public void createSetDelayTimeToVxOperationWithCode0xFX15() {
+        expectClassInstanceGivenOpCode(SetDelayTimerToVxOperation.class, (char) 0xf415);
+    }
 
-
+    @Test
+    public void createSetSoundTimerToVxOperationWithCode0xFX18() {
+        expectClassInstanceGivenOpCode(SetSoundTimerToVxOperation.class, (char) 0xf118);
+    }
     // --------------------------------------------------------------------------------------------
     // Checks that objects created were created with the correct data
     // --------------------------------------------------------------------------------------------

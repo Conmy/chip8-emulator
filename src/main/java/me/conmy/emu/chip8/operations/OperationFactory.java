@@ -59,6 +59,10 @@ public class OperationFactory {
                 switch (byte1) {
                     case 0x07:
                         return new SetVxToDelayTimerOperation(nibble3);
+                    case 0x15:
+                        return new SetDelayTimerToVxOperation(nibble3);
+                    case 0x18:
+                        return new SetSoundTimerToVxOperation(nibble3);
                 }
         }
         throw new RuntimeException("Could not decode opCode passed to OperationFactory. Was: " + byte2 + byte1);
