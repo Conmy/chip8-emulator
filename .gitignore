@@ -9,3 +9,8 @@ DS_Store
 # Maven
 log/
 target/
+
+# Eclipse
+.classpath
+.settings
+.project
