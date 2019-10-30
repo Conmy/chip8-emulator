@@ -222,6 +222,14 @@ public class OperationFactoryTest {
         expectClassInstanceGivenOpCode(SetIRegToSpriteAddressOfVxValueOperation.class, (char) 0xf129);
     }
 
+    /**
+     * 0xFX33: Store BCD-converted Vx value in: Memory(I), Memory(I+1), Memory(I+2)
+     */
+    @Test
+    public void createStoreBCDVxInMemoryOperationWithCode0xFX33() {
+        expectClassInstanceGivenOpCode(StoreBCDVxInMemoryOperation.class, (char) 0xF133);
+    }
+
     // --------------------------------------------------------------------------------------------
     // Checks that objects created were created with the correct data
     // --------------------------------------------------------------------------------------------
