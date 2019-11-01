@@ -49,6 +49,15 @@ public class Chip8Display {
         }
     }
 
+    public void clearScreen() {
+        boolean[][] bitMatrix = getBitMatrix();
+        for (int i=0; i < bitMatrix.length; i++) {
+            for (int j=0; j<bitMatrix[i].length; j++) {
+                bitMatrix[i][j] = false;
+            }
+        }
+    }
+
     // ==========================================
     // Getters and Setters
     // ==========================================

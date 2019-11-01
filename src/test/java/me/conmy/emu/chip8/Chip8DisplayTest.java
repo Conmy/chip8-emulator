@@ -195,4 +195,31 @@ public class Chip8DisplayTest {
             Assert.assertFalse(displayRow[i]);
         }
     }
+
+    @Test
+    public void clearScreenTurnsOffAllPixelsOnTheDisplay() {
+        int x=0;
+        int y=0;
+        byte noise = (byte) 0x0ff;
+        boolean[] expectedFFBooleanValues =
+                new boolean[] {true, true, true, true, true, true, true, true};
+
+        display.writeByte(x, y, noise);
+        // Confirm that the display has noise on it.
+        boolean[] displayRow = display.getDisplayRow(y);
+        for (int i=0; i < 8; i++) {
+            Assert.assertEquals(expectedFFBooleanValues[i], displayRow[i]);
+        }
+        for (int i=8; i < 64; i++) {
+            Assert.assertFalse(displayRow[i]);
+        }
+
+        display.clearScreen();
+
+        for (boolean[] row: display.getBitMatrix()) {
+            for(boolean bit: row) {
+                Assert.assertFalse(bit);
+            }
+        }
+    }
 }
