@@ -15,6 +15,8 @@ public class OperationFactory {
             case 0x0:
                 if (byte1 == (byte) 0xee) {
                     return new ReturnFromSubroutineOperation();
+                } else if (byte1 == (byte) 0xe0) {
+                    return new ClearDisplayOperation();
                 }
                 break;
             case 0x1:

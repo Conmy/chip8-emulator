@@ -9,25 +9,33 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 
 public class OperationFactoryTest {
 
-    // --------------------------------------------------------------------------------------------
-    // Checks that objects are created for the expected opCodes
-    // --------------------------------------------------------------------------------------------
-
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-    /**
-     * 0x00EE: Return from Subroutine.
-     */
     @Test
     public void invalidOpCodeThrowsARuntimeException() {
         expectedException.expect(RuntimeException.class);
         OperationFactory.decodeOpCodeToOperation((char) 0x0000);
     }
 
+    // --------------------------------------------------------------------------------------------
+    // Checks that objects are created for the expected opCodes
+    // --------------------------------------------------------------------------------------------
+
+    /**
+     * 0x00EE: Return from Subroutine.
+     */
     @Test
     public void createReturnFromSubroutineOperationWithCode0x00EE() {
         expectClassInstanceGivenOpCode(ReturnFromSubroutineOperation.class, (char) 0x00EE);
+    }
+
+    /**
+     * 0x00E0: Clears the display.
+     */
+    @Test
+    public void createClearDisplayOperationWithCode0x00E0() {
+        expectClassInstanceGivenOpCode(ClearDisplayOperation.class, (char) 0x00E0);
     }
 
     /**
