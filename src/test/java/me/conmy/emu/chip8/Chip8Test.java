@@ -1,6 +1,5 @@
 package me.conmy.emu.chip8;
 
-import me.conmy.emu.chip8.operations.OperationFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -26,7 +25,7 @@ public class Chip8Test {
 
         Assert.assertEquals("Memory not initialized correctly", 4096, chip8.getMemory().length);
         Assert.assertEquals("Program counter not set correctly", 512, chip8.getProgramCounter());
-        Assert.assertEquals("Stack size not intialized correctly", 48, chip8.getStack().capacity());
+        Assert.assertEquals("Stack size not initialized correctly", 48, chip8.getStack().capacity());
         Assert.assertEquals("Data Register size not initialized correctly", 16, chip8.getVDataRegisters().length);
         Assert.assertEquals("Delay Timer is not 0 after initialization", 0, chip8.getDelayTimer());
         Assert.assertEquals("Sound Timer is not 0 after initialization", 0, chip8.getSoundTimer());
@@ -96,6 +95,16 @@ public class Chip8Test {
         for (int i=0; i < 0x10; i++) {
             char addressLoc = Chip8.getSpriteRegAddress((byte) i);
             Assert.assertEquals(expectedAddress[i], addressLoc);
+        }
+    }
+
+    @Test
+    public void chip8ContainsAStoreForTheCurrentScreenOutput() {
+        Chip8Display screenDisplay = chip8.getScreenDisplay();
+
+        Assert.assertEquals(32, screenDisplay.getBitMatrix().length);
+        for (int i=0; i < 32; i++) {
+            Assert.assertEquals(64, screenDisplay.getBitMatrix()[i].length);
         }
     }
 }

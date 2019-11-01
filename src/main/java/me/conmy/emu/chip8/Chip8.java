@@ -42,6 +42,7 @@ public class Chip8 {
 
     private byte delayTimer;
     private byte soundTimer;
+    private Chip8Display screenDisplay;
 
     public Chip8() {
         memory = new byte[MEMORY_SIZE];
@@ -53,6 +54,7 @@ public class Chip8 {
         stack.ensureCapacity(STACK_SIZE);
         delayTimer = 0;
         soundTimer = 0;
+        screenDisplay = new Chip8Display();
     }
 
     public void loadApplication(byte[] applicationCode) {
@@ -156,5 +158,9 @@ public class Chip8 {
         for (int i=0; i < SPRITE_FONT_VALUES.length; i++) {
             getMemory()[SPRITE_FONT_START_LOCATION + i] = SPRITE_FONT_VALUES[i];
         }
+    }
+
+    public Chip8Display getScreenDisplay() {
+        return screenDisplay;
     }
 }
