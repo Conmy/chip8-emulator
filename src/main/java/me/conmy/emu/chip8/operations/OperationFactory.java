@@ -12,6 +12,11 @@ public class OperationFactory {
         byte byte1 = (byte) (opCode & 0x00ff);
 
         switch (nibble4) {
+            case 0x0:
+                if (byte1 == (byte) 0xee) {
+                    return new ReturnFromSubroutineOperation();
+                }
+                break;
             case 0x1:
                 return new JumpOperation(remainder);
             case 0x2:
@@ -75,6 +80,6 @@ public class OperationFactory {
                         return new LoadRegV0ToVxFromMemoryOperation(nibble3);
                 }
         }
-        throw new RuntimeException("Could not decode opCode passed to OperationFactory. Was: " + byte2 + byte1);
+        throw new RuntimeException(String.format("Could not decode opCode passed to OperationFactory. Was: %04X", opCode & 0x0ffff));
     }
 }

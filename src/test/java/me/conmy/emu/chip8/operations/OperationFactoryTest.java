@@ -16,10 +16,18 @@ public class OperationFactoryTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
+    /**
+     * 0x00EE: Return from Subroutine.
+     */
     @Test
     public void invalidOpCodeThrowsARuntimeException() {
         expectedException.expect(RuntimeException.class);
         OperationFactory.decodeOpCodeToOperation((char) 0x0000);
+    }
+
+    @Test
+    public void createReturnFromSubroutineOperationWithCode0x00EE() {
+        expectClassInstanceGivenOpCode(ReturnFromSubroutineOperation.class, (char) 0x00EE);
     }
 
     /**

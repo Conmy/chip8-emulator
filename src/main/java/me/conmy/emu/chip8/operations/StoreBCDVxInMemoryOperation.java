@@ -25,6 +25,7 @@ public class StoreBCDVxInMemoryOperation implements Operation {
 		memory[addressLoc + 1] = storeValues[1];
 		memory[addressLoc + 2] = storeValues[2];
 
+		chip8.incProgramCounter(2);
 	}
 
 	public byte getVxReg() {
