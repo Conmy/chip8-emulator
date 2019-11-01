@@ -230,6 +230,14 @@ public class OperationFactoryTest {
         expectClassInstanceGivenOpCode(StoreBCDVxInMemoryOperation.class, (char) 0xF133);
     }
 
+    /**
+     * 0xFX55: Store V0 to Vx in Memory at IReg Address.
+     */
+    @Test
+    public void createDumpRegV0ToVxInMemoryOperationWithCode0xFX55() {
+        expectClassInstanceGivenOpCode(DumpRegV0ToVxInMemoryOperation.class, (char) 0xF155);
+    }
+
     // --------------------------------------------------------------------------------------------
     // Checks that objects created were created with the correct data
     // --------------------------------------------------------------------------------------------
