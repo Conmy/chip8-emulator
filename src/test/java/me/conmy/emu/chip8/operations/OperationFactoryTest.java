@@ -238,6 +238,14 @@ public class OperationFactoryTest {
         expectClassInstanceGivenOpCode(DumpRegV0ToVxInMemoryOperation.class, (char) 0xF155);
     }
 
+    /**
+     * 0xFX65: Load From Memory at IReg Address into V0-Vx.
+     */
+    @Test
+    public void createLoadRegV0ToVxFromMemoryOperationWithCode0xFX65() {
+       expectClassInstanceGivenOpCode(LoadRegV0ToVxFromMemoryOperation.class, (char) 0xF565);
+    }
+
     // --------------------------------------------------------------------------------------------
     // Checks that objects created were created with the correct data
     // --------------------------------------------------------------------------------------------

@@ -71,6 +71,8 @@ public class OperationFactory {
                         return new StoreBCDVxInMemoryOperation(nibble3);
                     case 0x55:
                         return new DumpRegV0ToVxInMemoryOperation(nibble3);
+                    case 0x65:
+                        return new LoadRegV0ToVxFromMemoryOperation(nibble3);
                 }
         }
         throw new RuntimeException("Could not decode opCode passed to OperationFactory. Was: " + byte2 + byte1);
