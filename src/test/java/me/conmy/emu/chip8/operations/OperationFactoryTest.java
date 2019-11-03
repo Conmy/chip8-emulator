@@ -198,6 +198,13 @@ public class OperationFactoryTest {
         expectClassInstanceGivenOpCode(SetVxToRandANDNNOperation.class, (char) 0xC107);
     }
 
+    @Test
+    public void createDrawSpriteOperationWithCode0xDXYN() {
+        expectClassInstanceGivenOpCode(DrawSpriteOperation.class, (char) 0xD238);
+        expectClassInstanceGivenOpCode(DrawSpriteOperation.class, (char) 0xD14F);
+        expectClassInstanceGivenOpCode(DrawSpriteOperation.class, (char) 0xD61A);
+    }
+
     /**
      * 0xFX07: Vx = Delay_timer()
      */

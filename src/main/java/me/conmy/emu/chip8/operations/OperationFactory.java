@@ -62,6 +62,8 @@ public class OperationFactory {
                 return new JumpToV0PlusNNNOperation(remainder);
             case 0xc:
                 return new SetVxToRandANDNNOperation(nibble3, byte1);
+            case 0xd:
+                return new DrawSpriteOperation(nibble3, nibble2, Byte.toUnsignedInt(nibble1));
             case 0xf:
                 switch (byte1) {
                     case 0x07:
