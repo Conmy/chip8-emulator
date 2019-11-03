@@ -64,6 +64,13 @@ public class OperationFactory {
                 return new SetVxToRandANDNNOperation(nibble3, byte1);
             case 0xd:
                 return new DrawSpriteOperation(nibble3, nibble2, Byte.toUnsignedInt(nibble1));
+            case 0xe:
+                if (byte1 == (byte) 0x9e) {
+                    return new KeyPressEqualsVxOperation(nibble3);
+                } else if (byte1 == (byte) 0xa1) {
+                    return new KeyPressNotEqualsOperation(nibble3);
+                }
+                break;
             case 0xf:
                 switch (byte1) {
                     case 0x07:

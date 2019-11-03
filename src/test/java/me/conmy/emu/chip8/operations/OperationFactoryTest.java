@@ -198,11 +198,41 @@ public class OperationFactoryTest {
         expectClassInstanceGivenOpCode(SetVxToRandANDNNOperation.class, (char) 0xC107);
     }
 
+    /**
+     * 0xDXYN: Draw Sprite at position starting at Vx, Vy for a height of N
+     * Where value for each row of the sprite is:
+     * MemoryLocation(IReg + 0)
+     * MemoryLocation(IReg + 1)
+     * ...
+     * MemoryLocation(IReg + N)
+     */
     @Test
     public void createDrawSpriteOperationWithCode0xDXYN() {
         expectClassInstanceGivenOpCode(DrawSpriteOperation.class, (char) 0xD238);
         expectClassInstanceGivenOpCode(DrawSpriteOperation.class, (char) 0xD14F);
         expectClassInstanceGivenOpCode(DrawSpriteOperation.class, (char) 0xD61A);
+    }
+
+    /**
+     * 0xEX9E: Jump over next operation if value in Vx is a key pressed. 
+     */
+    @Test
+    public void createKeyPressEqualsVxOperationWithCode0xEX9E() {
+        expectClassInstanceGivenOpCode(KeyPressEqualsVxOperation.class, (char) 0xE19E);
+        expectClassInstanceGivenOpCode(KeyPressEqualsVxOperation.class, (char) 0xEe9E);
+        expectClassInstanceGivenOpCode(KeyPressEqualsVxOperation.class, (char) 0xEc9E);
+        expectClassInstanceGivenOpCode(KeyPressEqualsVxOperation.class, (char) 0xE09E);
+    }
+
+    /**
+     * 0xEXA1: Jump over next operation if value in Vx is not a key pressed.
+     */
+    @Test
+    public void createKeyPressNotEqualsVxOperationWithCode0xEXA1() {
+        expectClassInstanceGivenOpCode(KeyPressNotEqualsOperation.class, (char) 0xE1A1);
+        expectClassInstanceGivenOpCode(KeyPressNotEqualsOperation.class, (char) 0xEEA1);
+        expectClassInstanceGivenOpCode(KeyPressNotEqualsOperation.class, (char) 0xEcA1);
+        expectClassInstanceGivenOpCode(KeyPressNotEqualsOperation.class, (char) 0xE5A1);
     }
 
     /**

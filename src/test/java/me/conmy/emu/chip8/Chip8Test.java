@@ -7,6 +7,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.Matchers.contains;
+
 
 public class Chip8Test {
 
@@ -106,5 +109,28 @@ public class Chip8Test {
         for (int i=0; i < 32; i++) {
             Assert.assertEquals(64, screenDisplay.getBitMatrix()[i].length);
         }
+    }
+
+    @Test
+    public void setKeyPressedAddsTheKeyValueToPressedKeys() {
+        chip8.setKeyPressed((byte) 0x01);
+
+        Assert.assertThat(chip8.getPressedKeys(), contains((byte) 0x01));
+    }
+
+    @Test
+    public void clearPressedKeysRemovesAllKeysFromPressedKeys() {
+        chip8.setKeyPressed((byte) 0x0f);
+        Assert.assertThat(chip8.getPressedKeys(), contains((byte) 0x0f));
+
+        chip8.clearPressedKeys();
+        Assert.assertThat(chip8.getPressedKeys(), not(contains(0x0f)));
+    }
+
+    @Test
+    public void setKeyPressedAcceptsKeyValuesUpTo0x0f() {
+        expectedEx.expect(IllegalArgumentException.class);
+        expectedEx.expectMessage("Illegal KeyPress: ");
+        chip8.setKeyPressed((byte) 0x10);
     }
 }

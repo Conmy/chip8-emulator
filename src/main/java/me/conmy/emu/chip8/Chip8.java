@@ -3,6 +3,8 @@ package me.conmy.emu.chip8;
 import me.conmy.emu.chip8.operations.Operation;
 import me.conmy.emu.chip8.operations.OperationFactory;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class Chip8 {
@@ -44,6 +46,8 @@ public class Chip8 {
     private byte soundTimer;
     private Chip8Display screenDisplay;
 
+    private List<Byte> pressedKeys;
+
     public Chip8() {
         memory = new byte[MEMORY_SIZE];
         loadFontInToMemory();
@@ -55,6 +59,7 @@ public class Chip8 {
         delayTimer = 0;
         soundTimer = 0;
         screenDisplay = new Chip8Display();
+        pressedKeys = new ArrayList<Byte>();
     }
 
     public void loadApplication(byte[] applicationCode) {
@@ -162,5 +167,22 @@ public class Chip8 {
 
     public Chip8Display getScreenDisplay() {
         return screenDisplay;
+    }
+
+    public void setKeyPressed(byte keyValue) {
+        if (keyValue > 0x0f) {
+            throw new IllegalArgumentException(String.format("Illegal KeyPress: Tried to set a key press of 0x%X", keyValue));
+        }
+        if (! this.pressedKeys.contains(Byte.valueOf(keyValue))) {
+            pressedKeys.add(Byte.valueOf(keyValue));
+        }
+    }
+
+    public void clearPressedKeys() {
+        this.pressedKeys.clear();
+    }
+
+    public List<Byte> getPressedKeys() {
+        return this.pressedKeys;
     }
 }
