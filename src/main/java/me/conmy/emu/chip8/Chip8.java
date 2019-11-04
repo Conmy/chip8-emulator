@@ -196,8 +196,8 @@ public class Chip8 {
         if (keyValue > 0x0f) {
             throw new IllegalArgumentException(String.format("Illegal KeyPress: Tried to set a key press of 0x%X", keyValue));
         }
-        if (! this.pressedKeys.contains(Byte.valueOf(keyValue))) {
-            pressedKeys.add(Byte.valueOf(keyValue));
+        if (! this.pressedKeys.contains(keyValue)) {
+            pressedKeys.add(keyValue);
         }
     }
 
