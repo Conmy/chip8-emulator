@@ -4,22 +4,14 @@ import me.conmy.emu.utils.ByteConverter;
 
 public class Chip8Display {
 
-    private static final int DISPLAY_HEIGHT = 32;
-    private static final int DISPLAY_WIDTH = 64;
+    public static final int DISPLAY_HEIGHT = 32;
+    public static final int DISPLAY_WIDTH = 64;
 
     private boolean[][] bitMatrix;
     private boolean collisionDetected;
 
     public Chip8Display() {
         bitMatrix = new boolean[DISPLAY_HEIGHT][DISPLAY_WIDTH];
-    }
-
-
-    public boolean[] getDisplayRow(int row) {
-        if (row < 0 || row >= DISPLAY_HEIGHT) {
-            throw new IllegalArgumentException(String.format("Cannot access display row of index %d", row));
-        }
-        return getBitMatrix()[row];
     }
 
     public void writeByte(int x, int y, byte displayByte) {
@@ -61,6 +53,13 @@ public class Chip8Display {
     // ==========================================
     // Getters and Setters
     // ==========================================
+
+    public boolean[] getDisplayRow(int row) {
+        if (row < 0 || row >= DISPLAY_HEIGHT) {
+            throw new IllegalArgumentException(String.format("Cannot access display row of index %d", row));
+        }
+        return getBitMatrix()[row];
+    }
 
     public boolean[][] getBitMatrix() {
         return bitMatrix;

@@ -72,10 +72,10 @@ public class Chip8 {
         }
     }
 
-    public void emulateChipCycle() {
+    public void emulateChipCycle(long elapsedTime) {
         char opCode = getCurrentOpCode();
         executeOpCode(opCode);
-        updateTimers();
+        updateTimers(elapsedTime);
     }
 
     public char getCurrentOpCode() {
@@ -92,8 +92,31 @@ public class Chip8 {
         op.doOperation(this);
     }
 
-    public void updateTimers() {
+    public void updateTimers(long timeElapsed) {
 
+        int ticksElapsed = (int) (timeElapsed / 16);
+        updateDelayTimer(ticksElapsed);
+        updateSoundTimer(ticksElapsed);
+    }
+
+    public void updateDelayTimer(int ticksElapsed) {
+        byte delayTimerValue = getDelayTimer();
+        int newDelayTimerValue = Byte.toUnsignedInt(delayTimerValue) - ticksElapsed;
+        if (newDelayTimerValue <= 0) {
+            setDelayTimer((byte) 0x00);
+        } else {
+            setDelayTimer((byte) (newDelayTimerValue & 0x0ff));
+        }
+    }
+
+    public void updateSoundTimer(int ticksElapsed) {
+        byte soundTimerValue = getSoundTimer();
+        int newSoundTimerValue = Byte.toUnsignedInt(soundTimerValue) - ticksElapsed;
+        if (newSoundTimerValue <= 0) {
+            setSoundTimer((byte) 0x00);
+        } else {
+            setSoundTimer((byte) (newSoundTimerValue & 0x0ff));
+        }
     }
 
     public byte[] getMemory() {

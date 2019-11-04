@@ -31,7 +31,7 @@ public class LoadRegV0ToVxFromMemoryOperation implements Operation {
     }
 
     private int getVxRegInt() {
-        return Byte.toUnsignedInt(vxReg);
+        return Byte.toUnsignedInt(getVxReg());
     }
 
     private void setVxReg(byte vxReg) {

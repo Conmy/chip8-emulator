@@ -6,9 +6,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.contains;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 
 
 public class Chip8Test {
@@ -32,6 +35,7 @@ public class Chip8Test {
         Assert.assertEquals("Data Register size not initialized correctly", 16, chip8.getVDataRegisters().length);
         Assert.assertEquals("Delay Timer is not 0 after initialization", 0, chip8.getDelayTimer());
         Assert.assertEquals("Sound Timer is not 0 after initialization", 0, chip8.getSoundTimer());
+        // TODO: Missing properties that should be initialized
     }
 
     @Test
@@ -61,10 +65,13 @@ public class Chip8Test {
         memory[pc] = 0x60;
         memory[pc+1] = 0x00;
         Chip8 spyChip8 = Mockito.spy(chip8);
-        spyChip8.emulateChipCycle();
+        long timeElapsed = 0;
+
+        spyChip8.emulateChipCycle(timeElapsed);
+
         Mockito.verify(spyChip8).getCurrentOpCode();
         Mockito.verify(spyChip8).executeOpCode(Mockito.anyChar());
-        Mockito.verify(spyChip8).updateTimers();
+        Mockito.verify(spyChip8).updateTimers(timeElapsed);
     }
 
     @Test
@@ -74,7 +81,9 @@ public class Chip8Test {
         memory[0] = 0x001f;
         memory[1] = (byte) 0x00ff;
         chip8.setProgramCounter(0);
-        chip8.emulateChipCycle();
+        long timeElapsed = 0;
+
+        chip8.emulateChipCycle(timeElapsed);
 
         Assert.assertEquals(0xfff, chip8.getProgramCounter());
     }
@@ -132,5 +141,75 @@ public class Chip8Test {
         expectedEx.expect(IllegalArgumentException.class);
         expectedEx.expectMessage("Illegal KeyPress: ");
         chip8.setKeyPressed((byte) 0x10);
+    }
+
+    @Test
+    public void updateTimersCountsDownDelayTimerPassingANumberOfTickOf60HertzThatHasPassed() {
+        Chip8 chip8Spy = Mockito.spy(chip8);
+
+        long timeElapsedInMillis = 32;
+        chip8Spy.updateTimers(timeElapsedInMillis);
+        Mockito.verify(chip8Spy).updateDelayTimer(2);
+
+        timeElapsedInMillis = 48;
+        chip8Spy.updateTimers(timeElapsedInMillis);
+        Mockito.verify(chip8Spy).updateDelayTimer(3);
+    }
+
+    @Test
+    public void updateTimersCountsDownSoundTimerPassingANumberOfTickOf60HertzThatHasPassed() {
+        Chip8 chip8Spy = Mockito.spy(chip8);
+
+        long timeElapsedInMillis = 16;
+        chip8Spy.updateTimers(timeElapsedInMillis);
+        Mockito.verify(chip8Spy).updateSoundTimer(1);
+
+        timeElapsedInMillis = 64;
+        chip8Spy.updateTimers(timeElapsedInMillis);
+        Mockito.verify(chip8Spy).updateSoundTimer(4);
+    }
+
+    @Test
+    public void updateSoundTimerCountsDownByNumberOfTicksToZero() {
+        chip8.setSoundTimer((byte) 0x8);
+        chip8.updateSoundTimer(4);
+        Assert.assertEquals(0x4, chip8.getSoundTimer());
+
+        chip8.setSoundTimer((byte) 0x16);
+        chip8.updateSoundTimer(2);
+        Assert.assertEquals(0x14, chip8.getSoundTimer());
+
+        chip8.setSoundTimer((byte) 0xff);
+        chip8.updateSoundTimer(2);
+        Assert.assertEquals((byte) 0xfd, chip8.getSoundTimer());
+
+        chip8.setSoundTimer((byte) 0x8);
+        chip8.updateSoundTimer(18);
+        Assert.assertEquals(0x00, chip8.getSoundTimer());
+
+        chip8.setSoundTimer((byte) 0x8);
+        chip8.updateSoundTimer(8);
+        Assert.assertEquals(0x00, chip8.getSoundTimer());
+
+    }
+
+    @Test
+    public void updateDelayTimerCountsDownByNumberOfTicksToZero() {
+        chip8.setDelayTimer((byte) 0x01);
+        chip8.updateDelayTimer(4);
+        Assert.assertEquals(0x00, chip8.getDelayTimer());
+
+        chip8.setDelayTimer((byte) 0x16);
+        chip8.updateDelayTimer(2);
+        Assert.assertEquals(0x14, chip8.getDelayTimer());
+
+        chip8.setDelayTimer((byte) 0xff);
+        chip8.updateDelayTimer(8);
+        Assert.assertEquals((byte) 0xf7, chip8.getDelayTimer());
+
+        chip8.setDelayTimer((byte) 0xff);
+        chip8.updateDelayTimer(255);
+        Assert.assertEquals((byte) 0x00, chip8.getDelayTimer());
+
     }
 }
