@@ -37,4 +37,8 @@ public class SetVxToVxPlusVyOperation implements Operation {
     public byte getVyReg() {
         return vyReg;
     }
+
+    public String toString() {
+        return String.format("SET: V[%d] = V[%d] + V[%d]", getVxReg(), getVxReg(), getVyReg());
+    }
 }

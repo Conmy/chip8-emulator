@@ -30,4 +30,8 @@ public class RightShiftVxOperation implements Operation {
     private void setVxReg(byte vxReg) {
         this.vxReg = vxReg;
     }
+
+    public String toString() {
+        return String.format("SET: V[%d] = V[%d] >> 1", getVxReg(), getVxReg());
+    }
 }

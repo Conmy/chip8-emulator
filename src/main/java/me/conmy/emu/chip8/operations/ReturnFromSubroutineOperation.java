@@ -17,4 +17,8 @@ public class ReturnFromSubroutineOperation implements Operation {
 
         chip8.setProgramCounter(topStackAddressInt);
     }
+
+    public String toString() {
+        return "RETURN";
+    }
 }

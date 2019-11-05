@@ -25,4 +25,8 @@ public class SetSoundTimerToVxOperation implements Operation {
     private void setVxReg(byte vxReg) {
         this.vxReg = vxReg;
     }
+
+    public String toString() {
+        return String.format("SET: SoundTimer = V[%d]", getVxReg());
+    }
 }

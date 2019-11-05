@@ -37,4 +37,8 @@ public class LoadRegV0ToVxFromMemoryOperation implements Operation {
     private void setVxReg(byte vxReg) {
         this.vxReg = vxReg;
     }
+
+    public String toString() {
+        return String.format("LOAD: V[0-%d] = Mem(I[0-%d])", getVxReg(), getVxReg());
+    }
 }

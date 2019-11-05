@@ -24,4 +24,8 @@ public class JumpOperation implements Operation {
         }
         this.address = address;
     }
+
+    public String toString() {
+        return String.format("JUMP: PC = %d", (getAddress() & 0x0ffff));
+    }
 }

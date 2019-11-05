@@ -65,4 +65,8 @@ public class DrawSpriteOperation implements Operation {
     private void setHeight(int height) {
         this.height = height;
     }
+
+    public String toString() {
+        return String.format("DRAW: Display(V[%d], V[%d]) = Sprite(I[0-%d])", getVxReg(), getVyReg(), getHeight());
+    }
 }

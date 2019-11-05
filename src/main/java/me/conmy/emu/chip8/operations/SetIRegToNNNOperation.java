@@ -23,4 +23,8 @@ public class SetIRegToNNNOperation implements Operation {
     private void setAddress(char address) {
         this.address = address;
     }
+
+    public String toString() {
+        return String.format("SET: I = %04X", (getAddress() & 0x0ffff));
+    }
 }

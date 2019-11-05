@@ -42,4 +42,8 @@ public class VxEqualsNNOperation implements Operation {
         this.value = value;
     }
 
+    public String toString() {
+        return String.format("IF: V[%d] == %d", getVxRegister(), Byte.toUnsignedInt(getValue()));
+    }
+
 }

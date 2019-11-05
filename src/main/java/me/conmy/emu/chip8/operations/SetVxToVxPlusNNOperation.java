@@ -37,4 +37,8 @@ public class SetVxToVxPlusNNOperation implements Operation {
     private void setValue(byte value) {
         this.value = value;
     }
+
+    public String toString() {
+        return String.format("SET: V[%d] = V[%d] + %d", getVxReg(), getVxReg(), Byte.toUnsignedInt(getValue()));
+    }
 }

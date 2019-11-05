@@ -27,4 +27,8 @@ public class SetIRegToSpriteAddressOfVxValueOperation implements Operation {
     private void setVxReg(byte vxReg) {
         this.vxReg = vxReg;
     }
+
+    public String toString() {
+        return String.format("SET: I = sprite_address(V[%d])", getVxReg());
+    }
 }

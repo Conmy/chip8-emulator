@@ -27,4 +27,8 @@ public class SetVxToDelayTimerOperation implements Operation {
     private void setVxReg(byte vxReg) {
         this.vxReg = vxReg;
     }
+
+    public String toString() {
+        return String.format("SET: V[%d] = DelayTimer()", getVxReg());
+    }
 }

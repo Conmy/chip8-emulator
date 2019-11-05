@@ -40,4 +40,8 @@ public class VxEqualsVyOperation implements Operation {
     private void setVyRegister(byte vyReg) {
         this.vyRegister = vyReg;
     }
+
+    public String toString() {
+        return String.format("IF: V[%d] == V[%d]", getVxRegister(), getVyRegister());
+    }
 }

@@ -28,4 +28,8 @@ public class KeyPressNotEqualsOperation implements Operation {
     private void setVxReg(byte vxReg) {
         this.vxReg = vxReg;
     }
+
+    public String toString() {
+        return String.format("IF: key() != V[%d]", getVxReg());
+    }
 }

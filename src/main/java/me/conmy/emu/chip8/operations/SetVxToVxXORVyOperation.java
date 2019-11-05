@@ -37,4 +37,8 @@ public class SetVxToVxXORVyOperation implements Operation {
     private void setVyReg(byte vyReg) {
         this.vyReg = vyReg;
     }
+
+    public String toString() {
+        return String.format("SET: V[%d] XOR V[%d]", getVxReg(), getVyReg());
+    }
 }

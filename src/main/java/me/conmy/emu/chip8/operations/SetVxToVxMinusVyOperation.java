@@ -45,4 +45,8 @@ public class SetVxToVxMinusVyOperation implements Operation {
     private void setVyReg(byte vyReg) {
         this.vyReg = vyReg;
     }
+
+    public String toString() {
+        return String.format("SET: V[%d] = V[%d] - V[%d]", getVxReg(), getVxReg(), getVyReg());
+    }
 }

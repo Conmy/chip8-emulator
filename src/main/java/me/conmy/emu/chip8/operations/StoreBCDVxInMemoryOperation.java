@@ -34,5 +34,9 @@ public class StoreBCDVxInMemoryOperation implements Operation {
 
 	private void setVxReg(byte vxReg) {
 		this.vxReg = vxReg;
-	}	
+	}
+
+	public String toString() {
+		return String.format("SET: I = BCD(V[%d])", getVxReg());
+	}
 }

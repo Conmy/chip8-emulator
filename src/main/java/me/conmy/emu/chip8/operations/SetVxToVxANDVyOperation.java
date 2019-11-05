@@ -38,4 +38,8 @@ public class SetVxToVxANDVyOperation implements Operation {
     private void setVyReg(byte vyReg) {
         this.vyReg = vyReg;
     }
+
+    public String toString() {
+        return String.format("SET: V[%d] = V[%d] AND V[%d]", getVxReg(), getVxReg(), getVyReg());
+    }
 }

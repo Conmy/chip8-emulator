@@ -38,4 +38,8 @@ public class VxNotEqualsNNOperation implements Operation {
     private void setValue(byte value) {
         this.value = value;
     }
+
+    public String toString() {
+        return String.format("IF: V[%d] != %d", getVxRegister(), Byte.toUnsignedInt(getValue()));
+    }
 }

@@ -32,4 +32,8 @@ public class SetVxToNNOperation implements Operation {
     private void setValue(byte value) {
         this.value = value;
     }
+
+    public String toString() {
+        return String.format("SET: V[%d] = %d", getVxReg(), Byte.toUnsignedInt(getValue()));
+    }
 }

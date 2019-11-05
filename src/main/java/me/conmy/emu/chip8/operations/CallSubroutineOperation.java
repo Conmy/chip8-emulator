@@ -27,4 +27,8 @@ public class CallSubroutineOperation implements Operation {
         }
         this.address = address;
     }
+
+    public String toString() {
+        return String.format("CALL: @Memory[%d]", (getAddress() & 0x0ffff));
+    }
 }

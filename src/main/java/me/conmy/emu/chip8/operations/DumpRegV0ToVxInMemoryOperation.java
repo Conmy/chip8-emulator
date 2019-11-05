@@ -34,4 +34,8 @@ public class DumpRegV0ToVxInMemoryOperation implements Operation {
     private void setVxReg(byte vxReg) {
         this.vxReg = vxReg;
     }
+
+    public String toString() {
+        return String.format("LOAD: Mem(I[0-%d]) = V[0-%d]", getVxReg(), getVxReg());
+    }
 }

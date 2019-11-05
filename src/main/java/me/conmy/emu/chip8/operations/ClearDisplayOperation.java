@@ -15,4 +15,8 @@ public class ClearDisplayOperation implements Operation {
 
         chip8.incProgramCounter(2);
     }
+
+    public String toString() {
+        return "CLEAR DISPLAY";
+    }
 }

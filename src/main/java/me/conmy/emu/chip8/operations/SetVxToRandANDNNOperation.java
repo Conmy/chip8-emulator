@@ -40,4 +40,8 @@ public class SetVxToRandANDNNOperation implements Operation {
     private void setMaskNumber(byte maskNumber) {
         this.maskNumber = maskNumber;
     }
+
+    public String toString() {
+        return String.format("SET: V[%d] = rand(%02X)", getVxReg(), Byte.toUnsignedInt(getMaskNumber()));
+    }
 }

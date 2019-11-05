@@ -32,4 +32,8 @@ public class JumpToV0PlusNNNOperation implements Operation {
     private void setAddress(char address) {
         this.address = address;
     }
+
+    public String toString() {
+        return String.format("JUMP: PC = V[0] + %d", (getAddress() & 0x0ffff));
+    }
 }
