@@ -26,6 +26,7 @@ public class DrawSpriteOperation implements Operation {
         int y = Byte.toUnsignedInt(registers[getVyReg()]);
 
         byte[] sprite = new byte[getHeight()];
+        // TODO: Evaluate array copy
         for (int i=0; i<getHeight(); i++) {
             sprite[i] = memory[addressLocationInt + i];
         }

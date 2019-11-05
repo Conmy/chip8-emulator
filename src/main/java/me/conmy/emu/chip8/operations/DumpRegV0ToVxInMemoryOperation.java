@@ -16,6 +16,7 @@ public class DumpRegV0ToVxInMemoryOperation implements Operation {
         byte[] memory = chip8.getMemory();
         byte[] registers = chip8.getVDataRegisters();
 
+        // TODO: Evaluate array copy
         for (int i=0; i <= getVxRegAsInt(); i++) {
             memory[iRegAddress + i] = registers[i];
         }

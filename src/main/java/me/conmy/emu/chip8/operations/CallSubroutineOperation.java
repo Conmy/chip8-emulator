@@ -12,7 +12,7 @@ public class CallSubroutineOperation implements Operation {
 
     public void doOperation(Chip8 chip8) {
         int pc = chip8.getProgramCounter();
-        chip8.getStack().push(new Character((char) pc));
+        chip8.getStack().push((char) pc);
         int newAddress = getAddress();
         chip8.setProgramCounter(newAddress);
     }
