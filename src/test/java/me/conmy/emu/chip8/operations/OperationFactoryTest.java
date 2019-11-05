@@ -244,6 +244,22 @@ public class OperationFactoryTest {
     }
 
     /**
+     * 0xFX0A: Get value of pressed key and store in Vx
+     */
+    @Test
+    public void createGetKeyPressOperationWithCode0xFX0A() {
+        expectClassInstanceGivenOpCode(GetKeyPressOperation.class, (char) 0xf10a);
+    }
+
+    /**
+     * 0xFX1E: IReg = IReg + Vx
+     */
+    @Test
+    public void createSetIRegToIPlusVxOperationWithCode0xFX1E() {
+        expectClassInstanceGivenOpCode(SetIRegToIPlusVxOperation.class, (char) 0xf11E);
+    }
+
+    /**
      * 0xFX15: Delay_timer = Vx
      */
     @Test
@@ -257,14 +273,6 @@ public class OperationFactoryTest {
     @Test
     public void createSetSoundTimerToVxOperationWithCode0xFX18() {
         expectClassInstanceGivenOpCode(SetSoundTimerToVxOperation.class, (char) 0xf118);
-    }
-
-    /**
-     * 0xFX1E: IReg = IReg + Vx
-     */
-    @Test
-    public void createSetIRegToIPlusVxOperationWithCode0xFX1E() {
-        expectClassInstanceGivenOpCode(SetIRegToIPlusVxOperation.class, (char) 0xf11E);
     }
 
     /**

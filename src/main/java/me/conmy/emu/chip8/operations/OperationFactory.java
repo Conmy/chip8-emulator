@@ -75,6 +75,8 @@ public class OperationFactory {
                 switch (byte1) {
                     case 0x07:
                         return new SetVxToDelayTimerOperation(nibble3);
+                    case 0x0a:
+                        return new GetKeyPressOperation(nibble3);
                     case 0x15:
                         return new SetDelayTimerToVxOperation(nibble3);
                     case 0x18:
