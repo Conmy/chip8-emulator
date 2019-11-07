@@ -26,10 +26,7 @@ public class DrawSpriteOperation implements Operation {
         int y = Byte.toUnsignedInt(registers[getVyReg()]);
 
         byte[] sprite = new byte[getHeight()];
-        // TODO: Evaluate array copy
-        for (int i=0; i<getHeight(); i++) {
-            sprite[i] = memory[addressLocationInt + i];
-        }
+        if (getHeight() >= 0) System.arraycopy(memory, addressLocationInt + 0, sprite, 0, getHeight());
 
         // Needs to be cleared before a draw transaction to detect a collision.
         display.clearCollisionDetected();

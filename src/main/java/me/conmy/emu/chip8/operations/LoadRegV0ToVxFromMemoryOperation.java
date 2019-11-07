@@ -19,10 +19,7 @@ public class LoadRegV0ToVxFromMemoryOperation implements Operation {
         int iRegAddressInt = iRegAddress & 0x0ffff;
 
         int vxRegInt = getVxRegInt();
-        // TODO: Evaluate array copy
-        for (int i=0; i <= vxRegInt; i++) {
-            registers[i] = memory[iRegAddressInt + i];
-        }
+        if (vxRegInt + 1 >= 0) System.arraycopy(memory, iRegAddressInt, registers, 0, vxRegInt + 1);
 
         chip8.incProgramCounter(2);
     }
