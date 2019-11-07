@@ -3,10 +3,8 @@ package me.conmy.emu.chip8;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.mockito.ArgumentMatchers.any;
 
 public class Chip8PanelTest {
 
