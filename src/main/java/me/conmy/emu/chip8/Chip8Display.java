@@ -15,20 +15,22 @@ public class Chip8Display {
     }
 
     public void writeByte(int x, int y, byte displayByte) {
-        if ((x + 8) >= DISPLAY_WIDTH | y >= DISPLAY_HEIGHT) {
-            throw new IllegalArgumentException(
-                    String.format("Cannot draw sprite. Byte position overflows display width in pos range [(%d, %d) -> (%d, %d)]", x, y, x+8, y));
-        }
+//        if ((x + 8) >= DISPLAY_WIDTH | y >= DISPLAY_HEIGHT) {
+//            throw new IllegalArgumentException(
+//                    String.format("Cannot draw sprite. Byte position overflows display width in pos range [(%d, %d) -> (%d, %d)]", x, y, x+8, y));
+//        }
         boolean[] row = getDisplayRow(y);
         boolean[] sprite = ByteConverter.byteToBooleanArray(displayByte);
         for (int i=0; i < 8; i++) {
-            // Determine if the bit will be flipped
-            boolean flipped = (row[x + i] && sprite[i]);
-            // Set the new pixel value
-            row[x + i] = row[x + i] ^ sprite[i];
-            // Set collision detection if bit was flipped
-            if (flipped) {
-                setCollisionDetected(true);
+            if (x+i < row.length) {
+                // Determine if the bit will be flipped
+                boolean flipped = (row[x + i] && sprite[i]);
+                // Set the new pixel value
+                row[x + i] = row[x + i] ^ sprite[i];
+                // Set collision detection if bit was flipped
+                if (flipped) {
+                    setCollisionDetected(true);
+                }
             }
         }
     }

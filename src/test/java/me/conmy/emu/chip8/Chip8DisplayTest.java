@@ -51,15 +51,6 @@ public class Chip8DisplayTest {
     }
 
     @Test
-    public void writeByteThrowsExceptionIfInputResultsInInvalidScreenPosition() {
-
-        expectedException.expect(IllegalArgumentException.class);
-        display.writeByte(64, 0, (byte) 0x01);
-        expectedException.expect(IllegalArgumentException.class);
-        display.writeByte(60, 0, (byte) 0x00);
-    }
-
-    @Test
     public void writeSpriteToTheDisplayStartingAtXYCoordinates() {
 
         int x = 0;
