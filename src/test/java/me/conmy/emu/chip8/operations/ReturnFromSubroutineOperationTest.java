@@ -24,7 +24,7 @@ public class ReturnFromSubroutineOperationTest {
     }
 
     @Test
-    public void doOperationSetsProgramCounterToTheLocationOnTopOfStack() {
+    public void doOperationSetsProgramCounterToTheLocationOnTopOfStackPlusTwo() {
         Chip8 chip8 = new Chip8();
         Stack<Character> stack = chip8.getStack();
         char stackChar = (char) 0x0f02; // 3842
@@ -33,6 +33,6 @@ public class ReturnFromSubroutineOperationTest {
 
         op.doOperation(chip8);
 
-        Assert.assertEquals(stackCharValue, chip8.getProgramCounter());
+        Assert.assertEquals(stackCharValue + 2, chip8.getProgramCounter());
     }
 }

@@ -15,7 +15,7 @@ public class ReturnFromSubroutineOperation implements Operation {
         char topStackAddress = stack.pop();
         int topStackAddressInt = topStackAddress & 0x0ffff;
 
-        chip8.setProgramCounter(topStackAddressInt);
+        chip8.setProgramCounter(topStackAddressInt+2);
     }
 
     public String toString() {
