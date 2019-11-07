@@ -53,7 +53,7 @@ public class Chip8DebugFrame extends JFrame {
         add(jsp);
 
         setSize(400, 275);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         setLocationRelativeTo(null);
     }
 

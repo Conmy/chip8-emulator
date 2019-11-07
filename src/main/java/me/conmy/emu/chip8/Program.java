@@ -59,6 +59,7 @@ public class Program implements ActionListener {
         runMenu.add(createMenuItem("Next Step", this, "RUN_NEXT_STEP"));
 
         JMenu viewMenu = new JMenu("View");
+        viewMenu.add(createMenuItem("Show/Hide Application Code", this, "VIEW_APPLICATION_CODE"));
         viewMenu.add(createMenuItem("Show/Hide Program Counter", this, "VIEW_TOGGLE_PC"));
         viewMenu.add(createMenuItem("Show/Hide Register Values", this, "VIEW_TOGGLE_REG"));
         viewMenu.add(createMenuItem("Write Debug Messages", this, "VIEW_DEBUG"));
@@ -83,7 +84,6 @@ public class Program implements ActionListener {
     private void addDebugPanel() {
         debugFrame = new Chip8DebugFrame();
         debugFrame.createAndShowGUI();
-        debugFrame.setVisible(true);
     }
 
     private JMenuItem createMenuItem(String label, ActionListener actionListener, String command) {
@@ -181,6 +181,9 @@ public class Program implements ActionListener {
             case "VIEW_DEBUG":
                 Chip8 chip8 = chip8Panel.getChip8();
                 chip8.setDebug(!chip8.isDebug());
+                break;
+            case "VIEW_APPLICATION_CODE":
+                debugFrame.setVisible(!debugFrame.isVisible());
                 break;
         }
     }

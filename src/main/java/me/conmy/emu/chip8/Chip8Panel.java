@@ -16,10 +16,11 @@ public class Chip8Panel extends JPanel {
 
     public Chip8Panel() {
         chip8 = new Chip8();
-        chipCycleTimer = new Timer(15, new ActionListener() {
+        int delayTime = 4;
+        chipCycleTimer = new Timer(delayTime, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                chip8.emulateChipCycle(15);
+                chip8.emulateChipCycle(delayTime);
                 repaint();
             }
         });

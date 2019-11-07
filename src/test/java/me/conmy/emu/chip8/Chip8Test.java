@@ -6,12 +6,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.contains;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.times;
 
 
@@ -168,8 +165,6 @@ public class Chip8Test {
         chip8spy.updateTimers(timeElapsedInMillis);
         Mockito.verify(chip8spy, times(1)).updateDelayTimer(Mockito.eq(1));
         Mockito.verify(chip8spy, times(1)).updateSoundTimer(Mockito.eq(1));
-
-
     }
 
     @Test
@@ -206,7 +201,6 @@ public class Chip8Test {
         chip8.setSoundTimer((byte) 0x8);
         chip8.updateSoundTimer(8);
         Assert.assertEquals(0x00, chip8.getSoundTimer());
-
     }
 
     @Test
@@ -226,6 +220,63 @@ public class Chip8Test {
         chip8.setDelayTimer((byte) 0xff);
         chip8.updateDelayTimer(255);
         Assert.assertEquals((byte) 0x00, chip8.getDelayTimer());
+    }
 
+    @Test
+    public void resetChip8ClearsAnyApplicationCodeAndResetsTheProgramCounter() {
+        byte[] fakeApplication = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
+        chip8.loadApplication(fakeApplication);
+        chip8.setProgramCounter(555);
+
+        Assert.assertEquals(555, chip8.getProgramCounter());
+        for (int i=0; i < fakeApplication.length; i++) {
+            Assert.assertEquals("FakeApplication not loaded correctly at location " + i, fakeApplication[i], chip8.getMemory()[512 + i]);
+        }
+        chip8.resetChip8();
+
+        Assert.assertEquals("Incorrect PC after resetChip8", 512, chip8.getProgramCounter());
+        for (int i=0; i<fakeApplication.length; i++) {
+            Assert.assertEquals("Memory values not reset at location " + (512 + i), 0x00, chip8.getMemory()[512 + i]);
+        }
+    }
+
+    @Test
+    public void resetChip8ClearsDelayAndSoundTimers() {
+        chip8.setDelayTimer((byte) 0x01f);
+        chip8.setSoundTimer((byte) 0x0ac);
+
+        chip8.resetChip8();
+
+        Assert.assertEquals((byte) 0x00, chip8.getDelayTimer());
+        Assert.assertEquals((byte) 0x00, chip8.getSoundTimer());
+    }
+
+    @Test
+    public void resetChip8ClearsRegisters() {
+        byte[] registers = chip8.getVDataRegisters();
+        for (int i=0; i < registers.length; i++) {
+            registers[i] = (byte) (i + 5);
+        }
+
+        chip8.resetChip8();
+
+        for (byte reg: registers) {
+            Assert.assertEquals(0x00, reg);
+        }
+    }
+
+    @Test
+    public void resetChip8ResetsIRegLocation() {
+        // TODO: implement test
+    }
+
+    @Test
+    public void resetChip8ResetsTheStack() {
+        // TODO: implement test
+    }
+
+    @Test
+    public void resetChip8StillEnsuresFontSpritesAtMemoryLocationsLessThan512() {
+        // TODO: implement test
     }
 }

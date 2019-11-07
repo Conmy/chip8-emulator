@@ -126,6 +126,18 @@ public class Chip8 {
         }
     }
 
+    public void resetChip8() {
+        setProgramCounter(PROGRAM_COUNTER_START_LOCATION);
+        setMemory(new byte[MEMORY_SIZE]);
+
+        setDelayTimer((byte) 0x00);
+        setSoundTimer((byte) 0x00);
+
+        for (int i=0; i<getVDataRegisters().length; i++) {
+            getVDataRegisters()[i] = (byte) 0x00;
+        }
+    }
+
     public byte[] getMemory() {
         return memory;
     }
