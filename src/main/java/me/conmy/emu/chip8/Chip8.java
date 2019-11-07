@@ -45,8 +45,10 @@ public class Chip8 {
     private byte delayTimer;
     private byte soundTimer;
     private Chip8Display screenDisplay;
+    private boolean debug;
 
     private List<Byte> pressedKeys;
+    private int timerTickRemainder;
 
     public Chip8() {
         memory = new byte[MEMORY_SIZE];
@@ -60,6 +62,7 @@ public class Chip8 {
         soundTimer = 0;
         screenDisplay = new Chip8Display();
         pressedKeys = new ArrayList<Byte>();
+        debug = false;
     }
 
     public void loadApplication(byte[] applicationCode) {
@@ -89,12 +92,16 @@ public class Chip8 {
 
     public void executeOpCode(char opCode) {
         Operation op = OperationFactory.decodeOpCodeToOperation(opCode);
+        if (isDebug()) {
+            System.out.println(String.format("PC@%d:\tOpCode %04X\t%s", getProgramCounter(), (opCode & 0x0ffff), op.toString()));
+        }
         op.doOperation(this);
     }
 
     public void updateTimers(long timeElapsed) {
 
-        int ticksElapsed = (int) (timeElapsed / 16);
+        int ticksElapsed = (int) ((timeElapsed+timerTickRemainder) / 16);
+        timerTickRemainder = (int) ((timeElapsed+timerTickRemainder) % 16);
         updateDelayTimer(ticksElapsed);
         updateSoundTimer(ticksElapsed);
     }
@@ -179,7 +186,7 @@ public class Chip8 {
     }
 
     public static char getSpriteRegAddress(byte nibble) {
-        return (char) ((SPRITE_FONT_START_LOCATION + (5 * nibble)) & 0x0ffff);
+        return (char) ((SPRITE_FONT_START_LOCATION + (5 * Byte.toUnsignedInt(nibble))) & 0x0ffff);
     }
 
     private void loadFontInToMemory() {
@@ -194,7 +201,7 @@ public class Chip8 {
 
     public void setKeyPressed(byte keyValue) {
         if (keyValue > 0x0f) {
-            throw new IllegalArgumentException(String.format("Illegal KeyPress: Tried to set a key press of 0x%X", keyValue));
+            throw new IllegalArgumentException(String.format("Illegal KeyPress: Tried to set a key press of 0x%02X", keyValue));
         }
         if (! this.pressedKeys.contains(keyValue)) {
             pressedKeys.add(keyValue);
@@ -207,5 +214,13 @@ public class Chip8 {
 
     public List<Byte> getPressedKeys() {
         return this.pressedKeys;
+    }
+
+    public boolean isDebug() {
+        return debug;
+    }
+
+    public void setDebug(boolean debug) {
+        this.debug = debug;
     }
 }

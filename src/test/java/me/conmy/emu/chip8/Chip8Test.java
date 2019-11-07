@@ -12,6 +12,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.contains;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.times;
 
 
 public class Chip8Test {
@@ -154,6 +155,21 @@ public class Chip8Test {
         timeElapsedInMillis = 48;
         chip8Spy.updateTimers(timeElapsedInMillis);
         Mockito.verify(chip8Spy).updateDelayTimer(3);
+    }
+
+    @Test
+    public void updateTimersCanCountDownDelayTimerAt60HertzEvenIfTimeElapsedIsRunningFasterThan16MsAFrame() {
+        Chip8 chip8spy = Mockito.spy(chip8);
+
+        long timeElapsedInMillis = 8;
+        chip8spy.updateTimers(timeElapsedInMillis);
+        Mockito.verify(chip8spy, times(1)).updateDelayTimer(Mockito.eq(0));
+        Mockito.verify(chip8spy, times(1)).updateSoundTimer(Mockito.eq(0));
+        chip8spy.updateTimers(timeElapsedInMillis);
+        Mockito.verify(chip8spy, times(1)).updateDelayTimer(Mockito.eq(1));
+        Mockito.verify(chip8spy, times(1)).updateSoundTimer(Mockito.eq(1));
+
+
     }
 
     @Test
