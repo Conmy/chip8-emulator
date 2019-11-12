@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
+import java.util.Arrays;
+
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.contains;
 import static org.mockito.Mockito.times;
@@ -267,16 +269,34 @@ public class Chip8Test {
 
     @Test
     public void resetChip8ResetsIRegLocation() {
-        // TODO: implement test
+        chip8.setIAddressRegister((char) 0x0123);
+
+        chip8.resetChip8();
+
+        Assert.assertEquals((char) 0x000, chip8.getIAddressRegister());
     }
 
     @Test
     public void resetChip8ResetsTheStack() {
-        // TODO: implement test
+        chip8.getStack().push((char) 0x002);
+
+        chip8.resetChip8();
+
+        Assert.assertEquals(0, chip8.getStack().size());
     }
 
     @Test
     public void resetChip8StillEnsuresFontSpritesAtMemoryLocationsLessThan512() {
-        // TODO: implement test
+        chip8.resetChip8();
+        byte[] fontAddresses = Arrays.copyOfRange(
+                chip8.getMemory(), Chip8.SPRITE_FONT_START_LOCATION, Chip8.SPRITE_FONT_START_LOCATION + Chip8.SPRITE_FONT_VALUES.length);
+        Assert.assertArrayEquals(Chip8.SPRITE_FONT_VALUES, fontAddresses);
+    }
+
+    @Test
+    public void resetChip8EnsuresTimerTickRemainderIsReset() {
+        chip8.setTimerTickRemainder(12);
+        chip8.resetChip8();
+        Assert.assertEquals(0, chip8.getTimerTickRemainder());
     }
 }

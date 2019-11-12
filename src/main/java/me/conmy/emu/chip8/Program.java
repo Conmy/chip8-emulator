@@ -115,6 +115,9 @@ public class Program implements ActionListener {
                 fileChooser.setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "/git/personal/chip8/src/test/resources/c8games"));
                 int returnValue = fileChooser.showOpenDialog(frame);
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    if (chip8Panel.getChip8().isApplicationLoaded()) {
+                        chip8Panel.getChip8().resetChip8();
+                    }
                     File chosenFile = fileChooser.getSelectedFile();
                     // TODO: Validate file here
                     // Would validation include checking the contents??

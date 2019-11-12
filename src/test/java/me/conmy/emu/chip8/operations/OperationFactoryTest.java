@@ -27,7 +27,12 @@ public class OperationFactoryTest {
      */
     @Test
     public void createReturnFromSubroutineOperationWithCode0x00EE() {
-        expectClassInstanceGivenOpCode(ReturnFromSubroutineOperation.class, (char) 0x00EE);
+        char opCode = 0x00EE;
+        Class expectedClass = ReturnFromSubroutineOperation.class;
+
+        Operation op = OperationFactory.decodeOpCodeToOperation(opCode);
+
+        Assert.assertThat(op, instanceOf(expectedClass));
     }
 
     /**

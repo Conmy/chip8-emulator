@@ -1,13 +1,20 @@
 package me.conmy.emu.utils;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 public class BCDValueTest {
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void convertToByteArrayConvertsDecimalValuesToBytes() {
@@ -69,5 +76,23 @@ public class BCDValueTest {
                 Assert.assertEquals("Value of outArray byte didn't match expected", expectedValue, actualValue);
             }
         }
+    }
+
+    @Test
+    public void constructorStoresTheCorrectValueAsDecimalValue() {
+        BCDValue value = new BCDValue(12);
+        Assert.assertEquals(12, value.getDecimalValue());
+        value = new BCDValue((char) 0x05);
+        Assert.assertEquals(5, value.getDecimalValue());
+        value = new BCDValue((byte) 0x012);
+        Assert.assertEquals(18, value.getDecimalValue());
+    }
+
+    @Test
+    public void convertToByteArrayThrowsExceptionIfBCDValueIsNegative() {
+        expectedException.expect(IllegalArgumentException.class);
+
+        BCDValue value = new BCDValue(-12);
+        value.convertToByteArray();
     }
 }

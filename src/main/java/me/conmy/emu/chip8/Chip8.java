@@ -14,8 +14,8 @@ public class Chip8 {
     private static final int STACK_SIZE = 48;
     private static final int PROGRAM_COUNTER_START_LOCATION = 512;
 
-    private static final int SPRITE_FONT_START_LOCATION = 0;
-    private static final byte[] SPRITE_FONT_VALUES = {
+    public static final int SPRITE_FONT_START_LOCATION = 0;
+    public static final byte[] SPRITE_FONT_VALUES = {
             (byte) 0xF0, (byte) 0x90, (byte) 0x90, (byte) 0x90, (byte) 0xF0, // 0
             (byte) 0x20, (byte) 0x60, (byte) 0x20, (byte) 0x20, (byte) 0x70, // 1
             (byte) 0xF0, (byte) 0x10, (byte) 0xF0, (byte) 0x80, (byte) 0xF0, // 2
@@ -49,6 +49,7 @@ public class Chip8 {
 
     private List<Byte> pressedKeys;
     private int timerTickRemainder;
+    private boolean applicationLoaded;
 
     public Chip8() {
         memory = new byte[MEMORY_SIZE];
@@ -63,6 +64,7 @@ public class Chip8 {
         screenDisplay = new Chip8Display();
         pressedKeys = new ArrayList<Byte>();
         debug = false;
+        timerTickRemainder = 0;
     }
 
     public void loadApplication(byte[] applicationCode) {
@@ -73,6 +75,7 @@ public class Chip8 {
         for (int i=0; i < applicationCode.length; i++) {
             getMemory()[offsetStart + i] = applicationCode[i];
         }
+        applicationLoaded = true;
     }
 
     public void emulateChipCycle(long elapsedTime) {
@@ -129,6 +132,7 @@ public class Chip8 {
     public void resetChip8() {
         setProgramCounter(PROGRAM_COUNTER_START_LOCATION);
         setMemory(new byte[MEMORY_SIZE]);
+        loadFontInToMemory();
 
         setDelayTimer((byte) 0x00);
         setSoundTimer((byte) 0x00);
@@ -136,6 +140,11 @@ public class Chip8 {
         for (int i=0; i<getVDataRegisters().length; i++) {
             getVDataRegisters()[i] = (byte) 0x00;
         }
+        setIAddressRegister((char) 0x000);
+
+        getStack().clear();
+        setTimerTickRemainder(0);
+        getScreenDisplay().clearScreen();
     }
 
     public byte[] getMemory() {
@@ -234,5 +243,21 @@ public class Chip8 {
 
     public void setDebug(boolean debug) {
         this.debug = debug;
+    }
+
+    public int getTimerTickRemainder() {
+        return timerTickRemainder;
+    }
+
+    public void setTimerTickRemainder(int timerTickRemainder) {
+        this.timerTickRemainder = timerTickRemainder;
+    }
+
+    public boolean isApplicationLoaded() {
+        return applicationLoaded;
+    }
+
+    public void setApplicationLoaded(boolean applicationLoaded) {
+        this.applicationLoaded = applicationLoaded;
     }
 }
