@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
-import java.security.Key;
 
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.not;
